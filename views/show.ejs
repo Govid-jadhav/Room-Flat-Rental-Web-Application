@@ -1,0 +1,47 @@
+<% layout('layout/boilerplate') %>
+
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+
+                <h3 class="fw-bold mb-4">Listing Details</h3>
+
+                <% if (listing.image && listing.image.url) { %>
+                    <img src="<%= listing.image.url %>" alt="Listing Image"
+                        class="img-fluid w-100 rounded mb-4 shadow-sm" style="max-height: 500px; object-fit: cover;">
+                    <% } else { %>
+                        <img src="/images/placeholder.jpg" alt="No Image" class="img-fluid w-100 rounded mb-4 shadow-sm"
+                            style="max-height: 500px; object-fit: cover;">
+                        <% } %>
+
+                            <!-- Details -->
+                            <ul class="list-group mb-4">
+                                <li class="list-group-item"><strong>Title:</strong>
+                                    <%= listing.title %>
+                                </li>
+                                <li class="list-group-item"><strong>Description:</strong>
+                                    <%= listing.description %>
+                                </li>
+                                <li class="list-group-item"><strong>Price:</strong> ₹ <%=
+                                        listing.price.toLocaleString("en-IN") %>
+                                </li>
+                                <li class="list-group-item"><strong>Location:</strong>
+                                    <%= listing.location %>
+                                </li>
+                                <li class="list-group-item"><strong>Country:</strong>
+                                    <%= listing.country %>
+                                </li>
+                            </ul>
+
+                            <!-- Actions -->
+                            <div class="d-flex gap-3">
+                                <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning">Edit</a>
+                                <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+                                    <button class="btn btn-danger"
+                                        onclick="return confirm('Are you sure?');">Delete</button>
+                                </form>
+                            </div>
+
+            </div>
+        </div>
+    </div>
