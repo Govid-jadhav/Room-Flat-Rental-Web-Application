@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
+
 const listingSchema = new mongoose.Schema({
     title: String,
     description: String,
@@ -10,6 +11,13 @@ const listingSchema = new mongoose.Schema({
     price: Number,
     location: String,
     country: String,
+    reviews: [ // plural
+        {
+            type: schema.Types.ObjectId,
+            ref: "Review" // correct case
+        }
+    ]
 });
-const Listing = mongoose.model("listing", listingSchema);
+
+const Listing = mongoose.model("Listing", listingSchema);
 module.exports = Listing;

@@ -14,7 +14,7 @@
                             style="max-height: 500px; object-fit: cover;">
                         <% } %>
 
-                            <!-- Details -->
+                            <!-- Listing Info -->
                             <ul class="list-group mb-4">
                                 <li class="list-group-item"><strong>Title:</strong>
                                     <%= listing.title %>
@@ -33,13 +33,53 @@
                                 </li>
                             </ul>
 
-                            <!-- Actions -->
-                            <div class="d-flex gap-3">
+                            <!-- Edit & Delete Actions -->
+                            <div class="d-flex gap-3 mb-4">
                                 <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning">Edit</a>
                                 <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
                                     <button class="btn btn-danger"
                                         onclick="return confirm('Are you sure?');">Delete</button>
                                 </form>
+                            </div>
+
+                            <!-- Leave Review Form -->
+                            <div class="mb-5">
+                                <h5 class="mb-3">Leave a Comment</h5>
+                                <form action="/listings/<%= listing.id %>/reviews" method="post" novalidate
+                                    class="needs-validation">
+                                    <div class="mb-3">
+                                        <label for="rating" class="form-label">Rating</label>
+                                        <input type="range" min="1" max="5" id="rating" name="review[rating]"
+                                            class="form-range">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="comments" class="form-label">Comments</label>
+                                        <textarea name="review[comment]" id="comments" class="form-control" rows="3"
+                                            required></textarea>
+                                        <div class="invalid-feedback">Please input something</div>
+                                    </div>
+                                    <button type="submit" class="btn btn-dark">Submit</button>
+                                </form>
+                            </div>
+
+                            <!-- All Reviews (Compact & Responsive) -->
+                            <div class="mt-4">
+                                <h5 class="mb-3">All Reviews</h5>
+                                <div class="row g-3">
+                                    <% for (let review of listing.reviews) { %>
+                                        <div class="col-12 col-md-6">
+                                            <div class="border rounded p-3 h-100 bg-light">
+                                                <p class="mb-2 small text-muted">"<%= review.comment %>"</p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <small class="text-secondary">Rating:</small>
+                                                    <span class="badge bg-dark">
+                                                        <%= review.rating %>/5
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                </div>
                             </div>
 
             </div>
