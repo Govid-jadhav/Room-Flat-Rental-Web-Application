@@ -13,6 +13,10 @@ const MONGO_URL = "mongodb://127.0.0.1:27017/room";
 
 const ExpressError = require("./utils/ExpressError.js");
 const { listingSchema, reviewSchema } = require("./schema.js");
+const session = require("express-session");
+const { Session } = require("inspector/promises");
+
+
 
 
 main()
@@ -34,9 +38,18 @@ app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
+
+const sessionOptions = {
+    secret: "mysupersecretcode",
+    resave: false,
+    saveUninitialized: true
+};
+app.use(Session(sessionOptions));
+
 app.get("/", (req, res) => {
     res.send("Hi, I am root");
 });
+
 
 
 const validateReview = (req, res, next) => {
