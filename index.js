@@ -14,6 +14,8 @@ const MONGO_URL = "mongodb://127.0.0.1:27017/room";
 const ExpressError = require("./utils/ExpressError.js");
 const { listingSchema, reviewSchema } = require("./schema.js");
 const session = require("express-session");
+const flash = require("connect-flash");
+
 // const { Session } = require("inspector/promises");
 
 
@@ -51,12 +53,14 @@ const sessionOptions = {
     }
 };
 
-app.use(session(sessionOptions));
-
 app.get("/", (req, res) => {
     res.send("Hi, I am root");
 });
 
+
+
+app.use(session(sessionOptions));
+app.use(flash());
 
 
 const validateReview = (req, res, next) => {
@@ -81,6 +85,13 @@ const validateListings = (req, res, next) => {
         next();
     }
 };
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    next();
+});
+
+
 
 app.use("/listings", listings);
 
