@@ -44,7 +44,7 @@ const sessionOptions = {
     resave: false,
     saveUninitialized: true
 };
-app.use(Session(sessionOptions));
+app.use(session(sessionOptions));
 
 app.get("/", (req, res) => {
     res.send("Hi, I am root");
