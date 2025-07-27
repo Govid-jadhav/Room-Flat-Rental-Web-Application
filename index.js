@@ -43,7 +43,12 @@ const sessionOptions = {
     secret: "mysupersecretcode",
     resave: false,
     saveUninitialized: true,
-
+    cookie: {
+        httpOnly: true,             // Prevents client-side JS from accessing the cookie
+        // secure: true,            // Uncomment in production with HTTPS
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 1, // 1 week
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
 };
 
 app.use(session(sessionOptions));
