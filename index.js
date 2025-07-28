@@ -17,9 +17,10 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const User = require("./models/user.js");
+const user = require("./routes/user.js");
 // const { Session } = require("inspector/promises");
 
+const User = require("./models/user.js");
 
 
 
@@ -104,6 +105,7 @@ app.use((req, res, next) => {
 app.use("/listings", listings);
 
 app.use("/listings/:id/reviews", reviewRoutes);
+app.use("/", user);
 
 
 
