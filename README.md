@@ -39,27 +39,6 @@ Session Management: express-session
 
 Environment Variables: dotenv
 
-🏗️ Project Structure
-bash
-Copy
-Edit
-hotel-management/
-│
-├── models/               # Mongoose models (e.g., User.js)
-├── public/
-│   ├── css/
-│   └── js/               # Custom JS
-├── routes/
-│   ├── users.js          # Signup/Login routes
-│   └── listings.js       # (WIP)
-├── views/
-│   ├── users/            # signup.ejs, login.ejs
-│   ├── includes/         # navbar.ejs, footer.ejs, flash.ejs
-│   └── layout/           # boilerplate.ejs
-│
-├── app.js                # Main Express app
-├── package.json
-└── README.md
 📦 Installation
 bash
 Copy
