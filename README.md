@@ -1,126 +1,110 @@
-📘 Hotel Management Auth App – README
-This is a Node.js-based hotel listing web app that implements secure user authentication using Passport.js, along with sign up, login, and flash messaging. It uses EJS templates, Bootstrap UI, and MongoDB with Mongoose ORM.
+🏨 Hotel Management Web App (WIP)
+A Node.js-based hotel management application with user authentication, listings, and a Bootstrap-styled interface. Currently in development.
 
-📁 Project Structure
-pgsql
-Copy code
-hotel-management/
-├── models/
-│   └── user.js
-├── routes/
-│   └── user.js
-│   └── listings.js
-├── views/
-│   ├── includes/
-│   │   ├── flash.ejs
-│   │   ├── footer.ejs
-│   │   └── navbar.ejs
-│   ├── layout/
-│   │   └── boilerplate.ejs
-│   ├── users/
-│   │   ├── signup.ejs
-│   │   └── login.ejs
-│   └── listings/
-│       └── index.ejs
-├── public/
-│   ├── css/
-│   │   └── style.css
-│   └── js/
-│       └── script.js
-├── app.js (or index.js)
-├── package.json
-└── README.md
-⚙️ Installation
-Clone the repo
+🚀 Features (Completed / In Progress)
+ User registration (Passport.js)
 
-bash
-Copy code
-git clone https://github.com/yourusername/hotel-management-auth.git
-cd hotel-management-auth
-Install dependencies
+ User login/logout
 
-bash
-Copy code
-npm install
-Set up environment (optional)
-Create a .env file:
+ Flash messages for success/error
 
-env
-Copy code
-MONGO_URI=mongodb://localhost:27017/hotel-auth
-SESSION_SECRET=yourStrongSecret
-Run MongoDB
-Make sure MongoDB is running locally:
+ EJS templating with layout inheritance
 
-bash
-Copy code
-mongod
-Start the app
+ Bootstrap 5 styling
 
-bash
-Copy code
-npm start
-🚀 Features
-🔒 User Authentication (Signup/Login/Logout)
+ Hotel room listings (in progress)
 
-🔐 Password hashing using passport-local-mongoose
+ Admin dashboard
 
-📦 MongoDB & Mongoose for user storage
+ Booking system
 
-💬 Flash messages for feedback (via connect-flash)
+ User roles (Admin, Guest)
 
-📄 EJS views with clean Bootstrap 5 styling
+ Form validation (client & server)
 
-🛡 Express session for maintaining login state
-
-🧪 Routes
-Method	Route	Description
-GET	/signup	Render signup form
-POST	/signup	Create new user & login
-GET	/login	Render login form
-POST	/login	Login existing user
-GET	/logout	Log user out
-GET	/listings	Protected route (sample)
-
-🛠 Tech Stack
+🛠️ Tech Stack
 Backend: Node.js, Express.js
 
-Auth: Passport.js (passport-local)
+Authentication: Passport.js (passport-local)
 
-Frontend: EJS + Bootstrap 5
+Templating: EJS with layouts
 
-DB: MongoDB with Mongoose
+Database: MongoDB, Mongoose
 
-Utilities: connect-flash, express-session
+Frontend: Bootstrap 5, custom CSS
 
-🧑‍💻 Sample Flash Messages
+Flash Messages: connect-flash
+
+Session Management: express-session
+
+Environment Variables: dotenv
+
+🏗️ Project Structure
+bash
+Copy
+Edit
+hotel-management/
+│
+├── models/               # Mongoose models (e.g., User.js)
+├── public/
+│   ├── css/
+│   └── js/               # Custom JS
+├── routes/
+│   ├── users.js          # Signup/Login routes
+│   └── listings.js       # (WIP)
+├── views/
+│   ├── users/            # signup.ejs, login.ejs
+│   ├── includes/         # navbar.ejs, footer.ejs, flash.ejs
+│   └── layout/           # boilerplate.ejs
+│
+├── app.js                # Main Express app
+├── package.json
+└── README.md
+📦 Installation
+bash
+Copy
+Edit
+git clone https://github.com/your-username/hotel-management
+cd hotel-management
+npm install
+Create a .env file:
+
+ini
+Copy
+Edit
+DB_URL=mongodb://localhost:27017/hotel-db
+SECRET=yourSecretKey
+▶️ Running the App
+bash
+Copy
+Edit
+npm start
+🧪 Test Credentials
+You can register a new account at /signup or login with a seeded user (if applicable).
+
+✅ Flash Message Example
 js
-Copy code
+Copy
+Edit
 req.flash("success", `Welcome, ${user.username}!`);
-req.flash("error", "Invalid username or password.");
+Displayed using EJS:
+
 ejs
-Copy code
+Copy
+Edit
 <% if (success && success.length > 0) { %>
   <% success.forEach(msg => { %>
-    <div class="alert alert-success"><%= msg %></div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <%= msg %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
   <% }) %>
 <% } %>
-🔐 Auth Config (Passport)
-js
-Copy code
-const passport = require("passport");
-const LocalStrategy = require("passport-local");
-const User = require("./models/user");
+⚠️ Still To Do
+Middleware for authentication & roles
 
-app.use(require("express-session")({
-  secret: process.env.SESSION_SECRET || "defaultSecret",
-  resave: false,
-  saveUninitialized: false
-}));
+Listings CRUD
 
-app.use(passport.initialize());
-app.use(passport.session());
+Booking logic
 
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+Tests & validations
