@@ -34,16 +34,19 @@ router.get("/login", (req, res) => {
 // Handle login form submission
 router.post(
     "/login",
-    savedRedirectUrl,
+    savedRedirectUrl, // middleware to store intended URL (if needed)
     passport.authenticate("local", {
         failureRedirect: "/login",
         failureFlash: true
     }),
-    async (req, res) => {
+    (req, res) => {
+
         req.flash("success", `Welcome again, ${req.user.username}!`);
-        res.redirect(res.locals.redirectUrl);
+        const redirectUrl = res.locals.redirectUrl || "/listings";
+        res.redirect(redirectUrl);
     }
 );
+
 //logout
 
 const logoutUser = (req, res, next) => {

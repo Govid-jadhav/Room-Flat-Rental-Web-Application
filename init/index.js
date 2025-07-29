@@ -20,9 +20,15 @@ async function main() {
 const initDB = async () => {
     try {
         await Listing.deleteMany({});
-        await Listing.insertMany(initData.data); // ✅ correct key
-        console.log("Data was saved");
+        const listingsWithOwner = initData.data.map((obj) => {
+            return {
+                ...obj,
+                owner: new mongoose.Types.ObjectId("68891409332a9a44ac7b2328")
+            };
+        });
+        await Listing.insertMany(listingsWithOwner);
+        console.log(" Data was saved successfully with correct owner ObjectId");
     } catch (err) {
-        console.error("Error inserting data:", err);
+        console.error(" Error inserting data:", err);
     }
-};
+}
