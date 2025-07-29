@@ -1,18 +1,35 @@
+/* Navbar Styling */
 .navbar {
     height: 5rem;
-    background-color: white;
-
+    background-color: rgb(128, 59, 59);
+    /* Dark maroon background */
 }
 
-.fa-solid fa-hotel {
+/* Navbar brand (hotel icon/logo) */
+.navbar .navbar-brand {
+    color: white !important;
+    /* Brand text/icon in white */
+}
+
+/* Font Awesome hotel icon (fixing selector) */
+.fa-hotel {
     color: #fe424d;
     font-size: 2rem;
 }
 
-.nav-link {
-    color: #222222 !important;
+/* Navbar link text */
+.navbar .nav-link {
+    color: white !important;
+    /* All links in navbar white */
 }
 
+/* Hover effect for navbar links */
+.navbar .nav-link:hover {
+    color: #ffb3b3 !important;
+    /* Light red on hover */
+}
+
+/* Footer Styling */
 .footer {
     background: #f7f7f7;
     padding: 40px 0 20px 0;
@@ -84,7 +101,6 @@
 .footer-bottom a:hover,
 .footer-bottom .social-icon:hover {
     color: #FF385C;
-    /* Airbnb accent color */
 }
 
 .footer-media .social-icon {
@@ -94,6 +110,7 @@
     transition: color 0.2s;
 }
 
+/* Cards */
 .card-img-top {
     transition: transform 0.3s ease-in-out;
 }
@@ -106,20 +123,44 @@
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }
 
+/* Buttons */
 .btn1 {
     background-color: #fe424d;
     border: none !important;
     color: white;
 }
 
-/* flash alert styilng */
-
+/* Flash alert styling */
 .alert-glass {
-
     background-color: rgba(255, 255, 255, 0.15) !important;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     font-weight: 500;
+}
+
+/* Mobile responsive navbar (sidebar) */
+@media (max-width: 767.98px) {
+    .custom-collapse {
+        background-color: #212529;
+        /* Dark sidebar background */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 1rem;
+    }
+
+    /* Make nav text in sidebar white */
+    .custom-collapse .nav-link,
+    .custom-collapse .navbar-text {
+        color: white !important;
+    }
+
+    /* Optional: make body darker when menu opens (JS required to toggle class) */
+    body.menu-open {
+        background-color: #000 !important;
+    }
 }

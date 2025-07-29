@@ -16,7 +16,9 @@ router.post("/signup", async (req, res) => {
         const user = new User({ email, username });
         const registeredUser = await User.register(user, password);
         req.login(registeredUser, err => {
-            if (err) return next(err);
+            if (err) {
+                return next(err);
+            }
             req.flash("success", `Welcome, ${registeredUser.username}!`);
             res.redirect("/listings");
         });
@@ -25,6 +27,7 @@ router.post("/signup", async (req, res) => {
         res.redirect("/signup");
     }
 });
+
 router.get("/login", (req, res) => {
     res.render("users/login.ejs");
 });// Handle login form submission
@@ -39,4 +42,16 @@ router.post(
         res.redirect("/listings");
     }
 );
+//logout
+
+const logoutUser = (req, res, next) => {
+    req.logout(err => {
+        if (err) return next(err);
+        req.flash("success", "You have been logged out.");
+        res.redirect("/listings");
+    });
+};
+
+router.get("/logout", logoutUser);
+
 module.exports = router;
