@@ -21,12 +21,15 @@ const validateReview = (req, res, next) => {
 router.post("/", validateReview, wrapAsync(async (req, res) => {
     const listing = await Listing.findById(req.params.id);
     const newReview = new Review(req.body.review);
+    newReview.author = req.user._id;
+    console.log(newReview);
     listing.reviews.push(newReview);
     await newReview.save();
     await listing.save();
     req.flash("success", "New Review Posted");
-    res.redirect(`/listings/${listing._id}`);  // ✅ This line was missing
+    res.redirect(`/listings/${listing._id}`);
 }));
+
 
 // DELETE: Remove a review
 router.delete("/:reviewId", wrapAsync(async (req, res) => {

@@ -29,14 +29,26 @@ router.post("/", isLoggedIn, validateListings, wrapAsync(async (req, res) => {
 
 // Show Route - Show details of a listing
 router.get("/:id", wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    const listing = await Listing.findById(id).populate("reviews").populate("owner");
+    const listing = await Listing.findById(req.params.id)
+        .populate({
+            path: "reviews",
+            populate: {
+                path: "author",
+                model: "User"
+            }
+        })
+        .populate("owner");
+
+
     if (!listing) {
         req.flash("error", "Listing not found");
         return res.redirect("/listings");
     }
-    res.render("show.ejs", { listing });
+
+    res.render("show", { listing });
+
 }));
+
 
 // Edit Listing Form
 router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(async (req, res) => {
