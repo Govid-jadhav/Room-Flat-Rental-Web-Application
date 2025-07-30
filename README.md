@@ -84,3 +84,26 @@ Copy code
     </div>
   <% }) %>
 <% } %>
+
+Added isOwner middleware to protect listing edit/delete
+
+Fixed model registration error (Schema hasn't been registered)
+
+Injected currentUser into res.locals for global EJS access
+
+Enforced isLoggedIn & isOwner middleware on listing routes
+
+Flash messages on unauthorized access
+
+Populated reviews on listing show page
+
+⚠️ Still To Do
+Middleware for Admin/Guest role-based access
+
+Booking logic (with availability & date validation)
+
+Admin dashboard interface
+
+UI/UX polishing & full form validations
+
+Testing routes & error handling
