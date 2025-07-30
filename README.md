@@ -45,3 +45,42 @@ Session Management: express-session
 
 Environment Config: dotenv
 
+📦 Installation
+bash
+Copy code
+git clone https://github.com/your-username/hotel-management
+cd hotel-management
+npm install
+🔐 Setup Environment Variables
+Create a .env file in the root:
+
+env
+Copy code
+DB_URL=mongodb://localhost:27017/hotel-db
+SECRET=yourSecretKey
+▶️ Running the App
+bash
+Copy code
+npm start
+Visit http://localhost:3000 in your browser.
+
+🧪 Test Credentials
+You can register a new user at /signup
+Or log in with any seeded/test user (if implemented).
+
+✅ Flash Message Example
+Backend:
+js
+Copy code
+req.flash("success", `Welcome, ${user.username}!`);
+Frontend (EJS):
+ejs
+Copy code
+<% if (success && success.length > 0) { %>
+  <% success.forEach(msg => { %>
+    <div class="alert alert-success alert-dismissible fade show">
+      <%= msg %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  <% }) %>
+<% } %>
