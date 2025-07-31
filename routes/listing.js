@@ -6,6 +6,9 @@ const ExpressError = require("../utils/ExpressError.js");
 const { listingSchema } = require("../schema.js");
 const { isLoggedIn, isOwner, validateListings } = require("../middelware.js");
 const listingControllers = require("../controllers/listing.js");
+const multer = require('multer');
+const upload = multer(storage);
+const { storage } = require("../cloudConfig.js");
 
 router
     .route("/")
