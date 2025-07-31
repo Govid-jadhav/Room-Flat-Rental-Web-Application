@@ -6,6 +6,8 @@ const { reviewSchema } = require("../schema.js");
 const Listing = require("../models/listing.js");
 const Review = require("../models/review.js");
 
+const reviewControllers = require("../controllers/reviews");
+
 // Middleware to validate review input
 const validateReview = (req, res, next) => {
     let { error } = reviewSchema.validate(req.body);
@@ -18,26 +20,16 @@ const validateReview = (req, res, next) => {
 };
 
 // POST: Add a new review
-router.post("/", validateReview, wrapAsync(async (req, res) => {
-    const listing = await Listing.findById(req.params.id);
-    const newReview = new Review(req.body.review);
-    newReview.author = req.user._id;
-    console.log(newReview);
-    listing.reviews.push(newReview);
-    await newReview.save();
-    await listing.save();
-    req.flash("success", "New Review Posted");
-    res.redirect(`/listings/${listing._id}`);
-}));
-
+router.post(
+    "/",
+    validateReview,
+    wrapAsync(reviewControllers.postListing)
+);
 
 // DELETE: Remove a review
-router.delete("/:reviewId", wrapAsync(async (req, res) => {
-    const { id, reviewId } = req.params;
-    await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
-    await Review.findByIdAndDelete(reviewId);
-    req.flash("success", "Review Deleted");
-    res.redirect(`/listings/${id}`);
-}));
+router.delete(
+    "/:reviewId",
+    wrapAsync(reviewControllers.deletelisting)
+);
 
 module.exports = router;
