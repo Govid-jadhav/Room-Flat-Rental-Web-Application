@@ -57,3 +57,64 @@ Flash Messages: connect-flash
 Session: express-session
 
 Map API: Leaflet.js, Nominatim, MarkerCluster
+
+📦 Installation
+bash
+Copy code
+git clone https://github.com/your-username/hotel-management
+cd hotel-management
+npm install
+🔐 Environment Variables
+Create a .env file in the root directory:
+
+env
+Copy code
+DB_URL=mongodb://localhost:27017/hotel-db
+SECRET=yourSecretKey
+▶️ Running the App
+bash
+Copy code
+npm start
+Visit http://localhost:3000 in your browser.
+
+🧪 Test Credentials
+Register a user at /signup
+
+Or log in with any user you've created.
+
+💬 Flash Message Usage
+Backend
+
+js
+Copy code
+req.flash("success", `Welcome, ${user.username}!`);
+Frontend (EJS)
+
+ejs
+Copy code
+<% if (success && success.length > 0) { %>
+  <% success.forEach(msg => { %>
+    <div class="alert alert-success alert-dismissible fade show">
+      <%= msg %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  <% }) %>
+<% } %>
+🌐 Map Features (WIP)
+Implemented using Leaflet.js:
+
+Map initialized on listing show page
+
+Displaying marker based on listing coordinates
+
+[In Progress]
+
+Auto-center on user's location (navigator.geolocation)
+
+Show all listings on index map
+
+Marker clustering (leaflet.markercluster)
+
+Autocomplete address search (Nominatim)
+
+Fullscreen toggle option
