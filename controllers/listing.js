@@ -33,46 +33,46 @@ module.exports.showListing = async (req, res) => {
 };
 
 
-module.exports.createListing = async (req, res) => {
-    const listing = new Listing(req.body.listing);
-    listing.owner = req.user._id;
+module.exports.createlisting = async (req, res) => {
+    const listingData = req.body.listing;
+    const locationString = `${listingData.location}, ${listingData.country}`;
 
-    // 🗺️ Get geo-coordinates from OpenStreetMap
-    try {
-        const geoData = await axios.get('https://nominatim.openstreetmap.org/search', {
-            params: {
-                q: req.body.listing.location,
-                format: 'json'
-            },
-            headers: {
-                'User-Agent': 'HotelManagementApp' // This is required by Nominatim API
-            }
-        });
-
-        if (geoData.data.length) {
-            listing.latitude = geoData.data[0].lat;
-            listing.longitude = geoData.data[0].lon;
+    // 🌍 Get coordinates from Nominatim
+    const geoRes = await axios.get("https://nominatim.openstreetmap.org/search", {
+        params: {
+            q: locationString,
+            format: "json",
+            limit: 1
+        },
+        headers: {
+            'User-Agent': 'HotelManagementApp'
         }
-    } catch (err) {
-        console.error('Geolocation fetch failed:', err.message);
+    });
+
+    const [geo] = geoRes.data;
+    if (!geo) {
+        req.flash("error", "Invalid location.");
+        return res.redirect("/listings/new");
     }
 
-    // 🌄 Image handling
+    const newListing = new Listing(listingData);
+    newListing.geometry = {
+        type: "Point",
+        coordinates: [parseFloat(geo.lon), parseFloat(geo.lat)]
+    };
+    newListing.owner = req.user._id;
+
     if (req.file) {
-        listing.image = {
+        newListing.image = {
             url: req.file.path,
             filename: req.file.filename
         };
     }
 
-    await listing.save();
-    req.flash("success", "Listing created successfully!");
-    res.redirect(`/listings/${listing._id}`);
+    await newListing.save();
+    req.flash("success", "Listing Created!");
+    res.redirect(`/listings/${newListing._id}`);
 };
-
-
-
-
 // 📌 EDIT FORM CONTROLLER: Render edit form for a specific listing
 module.exports.editListing = async (req, res) => {
     let { id } = req.params;

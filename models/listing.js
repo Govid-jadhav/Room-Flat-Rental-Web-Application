@@ -11,9 +11,18 @@ const listingSchema = new mongoose.Schema({
     },
     price: Number,
     location: String,
-    latitude: Number,
-    longitude: Number,
     country: String,
+    geometry: {
+        type: {
+            type: String,
+            enum: ["Point"],
+            required: true
+        },
+        coordinates: {
+            type: [Number], // [longitude, latitude]
+            required: true
+        }
+    },
     reviews: [
         {
             type: schema.Types.ObjectId,
