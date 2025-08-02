@@ -118,3 +118,19 @@ Marker clustering (leaflet.markercluster)
 Autocomplete address search (Nominatim)
 
 Fullscreen toggle option
+
+
+⚠️ Still To Do
+Booking system (not implemented yet)
+
+Role-based access (not in project yet)
+
+Admin dashboard (not planned yet)
+
+Full validations and polished UI
+
+Search & filter listings
+
+Mobile/responsive map UI improvements
+
+Better error handling & test coverage
