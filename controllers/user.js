@@ -23,13 +23,17 @@ module.exports.signup = async (req, res) => {
 module.exports.renderSignup = (req, res) => {
     res.render("users/signup"); // Make sure this path is correct
 };
-module.exports.renderlogin = (req, res) => {
-
-    req.flash("success", `Welcome again, ${req.user.username}!`);
-    const redirectUrl = res.locals.redirectUrl || "/listings";
-    res.redirect(redirectUrl);
+// module.exports.renderLogin = (req, res) => {
+//     req.flash("success", `Welcome again, ${req.user.username}!`);
+//     const redirectUrl = res.locals.redirectUrl || "/listings";
+//     res.redirect(redirectUrl);
+// };
+module.exports.renderLoginForm = (req, res) => {
+    res.render("users/login.ejs"); // no req.user here
 };
 
 module.exports.login = (req, res) => {
-    res.render("users/login.ejs");
+    req.flash("success", `Welcome again, ${req.user.username}!`);
+    const redirectUrl = res.locals.redirectUrl || "/listings";
+    res.redirect(redirectUrl);
 };

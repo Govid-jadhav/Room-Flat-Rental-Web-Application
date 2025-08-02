@@ -1,14 +1,14 @@
 const Listing = require("../models/listing");
 
+
 // 📌 INDEX CONTROLLER: Show all listings
 module.exports.index = async (req, res) => {
     const allListings = await Listing.find({});
     res.render("index.ejs", { allListings });
 };
 
-// 📌 NEW FORM CONTROLLER: Render form to create new listing
 module.exports.renderNewForm = (req, res) => {
-    res.render("new.ejs");
+    res.render("new.ejs", { listing: {} });
 };
 
 // 📌 SHOW CONTROLLER: Show detailed view of a listing by ID
@@ -30,15 +30,23 @@ module.exports.showListing = async (req, res) => {
 
     res.render("show", { listing });
 };
-
-// 📌 CREATE CONTROLLER: Create a new listing and save to DB
 module.exports.createlisting = async (req, res) => {
-    const newListing = new Listing(req.body.listing);
-    newListing.owner = req.user._id; // Set the currently logged-in user as owner
-    await newListing.save();
-    req.flash("success", "New Listing Created");
-    res.redirect("/listings");
+    const listing = new Listing(req.body.listing);
+    listing.owner = req.user._id;
+
+    if (req.file) {
+        listing.image = {
+            url: req.file.path,
+            filename: req.file.filename
+        };
+    }
+
+    await listing.save();
+    req.flash("success", "Listing created successfully!");
+    res.redirect(`/listings/${listing._id}`);
 };
+
+
 
 // 📌 EDIT FORM CONTROLLER: Render edit form for a specific listing
 module.exports.editListing = async (req, res) => {
@@ -48,16 +56,29 @@ module.exports.editListing = async (req, res) => {
         req.flash("error", "Listing not found");
         return res.redirect("/listings");
     }
-    res.render("edit.ejs", { listing });
+    const blurredImageUrl = listing.image.url.replace(
+        "/upload",
+        "/upload/h_300,w_250,e_blur:300");
+    res.render("edit.ejs", { listing, blurredImageUrl });
 };
 
-// 📌 UPDATE CONTROLLER: Handle form submission to update listing
 module.exports.updateListing = async (req, res) => {
     const { id } = req.params;
-    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+    let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing }, { new: true });
+
+    // Handle image update if new file is uploaded
+    if (req.file) {
+        listing.image = {
+            url: req.file.path,
+            filename: req.file.filename
+        };
+        await listing.save(); // Save new image
+    }
+
     req.flash("success", "Listing updated successfully");
-    res.redirect(`/listings/${id}`);
+    res.redirect(`/listings/${listing._id}`);
 };
+
 
 // 📌 DELETE CONTROLLER: Delete a listing by ID
 module.exports.deletelisting = async (req, res) => {

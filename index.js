@@ -1,4 +1,6 @@
-
+if (process.env.NODE_ENV != "production") {
+    require("dotenv").config();
+}
 const express = require("express");
 const ejsMate = require("ejs-mate");
 const app = express();
@@ -19,6 +21,10 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const user = require("./routes/user.js");
 // const { Session } = require("inspector/promises");
+const multer = require("multer");
+const { storage } = require("./cloudConfig");
+
+// const upload = multer({ storage });
 
 const User = require("./models/user.js");
 
@@ -117,6 +123,13 @@ app.use("/", user);
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "someting went wrong" } = err;
     res.status(statusCode).send(message);
+});
+
+app.use((err, req, res, next) => {
+    console.error("🔥 ERROR:", err);
+    if (res.headersSent) return next(err);
+    req.flash("error", err.message);
+    res.redirect("/listings");
 });
 
 

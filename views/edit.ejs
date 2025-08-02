@@ -5,7 +5,7 @@
             <div class="col-12 col-md-8 offset-md-2">
                 <h3>Edit Listing</h3>
                 <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate
-                    class="needs-validation">
+                    class="needs-validation" enctype="multipart/form-data">
 
                     <!-- Title -->
                     <div class="mb-3">
@@ -26,16 +26,19 @@
                             Description Should not be empty
                         </div>
                     </div>
-
-                    <!-- Image URL -->
                     <div class="mb-3">
-                        <label for="image" class="form-label">Image URL</label>
-                        <input id="image" name="listing[image]" type="text" class="form-control"
-                            value="<%= listing.image %>" required>
-                        <div class="invalid-feedback">
-                            IMG should be uplode here
-                        </div>
+                        Original image preview (blurred):
+                        <br>
+                        <img src="<%= blurredImageUrl %>" alt="Blurred preview" />
                     </div>
+
+                    <!-- Image Upload -->
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Upload New Image</label>
+                        <input id="image" name="image" type="file" accept="image/*" class="form-control">
+                        <div class="form-text">If left blank, the current image will be retained.</div>
+                    </div>
+
 
                     <!-- Price and Country Row -->
                     <div class="row">
