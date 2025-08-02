@@ -1,4 +1,5 @@
 const Listing = require("../models/listing");
+const axios = require('axios');
 
 
 // 📌 INDEX CONTROLLER: Show all listings
@@ -30,10 +31,33 @@ module.exports.showListing = async (req, res) => {
 
     res.render("show", { listing });
 };
-module.exports.createlisting = async (req, res) => {
+
+
+module.exports.createListing = async (req, res) => {
     const listing = new Listing(req.body.listing);
     listing.owner = req.user._id;
 
+    // 🗺️ Get geo-coordinates from OpenStreetMap
+    try {
+        const geoData = await axios.get('https://nominatim.openstreetmap.org/search', {
+            params: {
+                q: req.body.listing.location,
+                format: 'json'
+            },
+            headers: {
+                'User-Agent': 'HotelManagementApp' // This is required by Nominatim API
+            }
+        });
+
+        if (geoData.data.length) {
+            listing.latitude = geoData.data[0].lat;
+            listing.longitude = geoData.data[0].lon;
+        }
+    } catch (err) {
+        console.error('Geolocation fetch failed:', err.message);
+    }
+
+    // 🌄 Image handling
     if (req.file) {
         listing.image = {
             url: req.file.path,
@@ -45,6 +69,7 @@ module.exports.createlisting = async (req, res) => {
     req.flash("success", "Listing created successfully!");
     res.redirect(`/listings/${listing._id}`);
 };
+
 
 
 

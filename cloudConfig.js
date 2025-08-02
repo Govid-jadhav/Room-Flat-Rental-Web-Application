@@ -8,11 +8,11 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET,
 });
 
-// ✅ Log to verify environment variables
-console.log("Cloudinary config test:");
-console.log("CLOUD_NAME:", process.env.CLOUD_NAME);
-console.log("CLOUD_API_KEY:", process.env.CLOUD_API_KEY);
-console.log("CLOUD_API_SECRET:", process.env.CLOUD_API_SECRET ? "✓ Loaded" : "❌ MISSING");
+// // ✅ Log to verify environment variables
+// console.log("Cloudinary config test:");
+// console.log("CLOUD_NAME:", process.env.CLOUD_NAME);
+// console.log("CLOUD_API_KEY:", process.env.CLOUD_API_KEY);
+// console.log("CLOUD_API_SECRET:", process.env.CLOUD_API_SECRET ? "✓ Loaded" : "❌ MISSING");
 
 const storage = new CloudinaryStorage({
     cloudinary,

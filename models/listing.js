@@ -11,6 +11,8 @@ const listingSchema = new mongoose.Schema({
     },
     price: Number,
     location: String,
+    latitude: Number,
+    longitude: Number,
     country: String,
     reviews: [
         {
