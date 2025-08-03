@@ -1,136 +1,139 @@
-🏨 Hotel Management Web App (WIP)
-A Node.js-based hotel management application with user authentication, hotel room listings, reviews, and a Bootstrap-styled interface. Currently under active development.
-🚀 Features
+A full-stack hotel/room listing platform built with Node.js, Express, MongoDB, and Bootstrap. Users can register, list properties, leave reviews, and search/filter results with a responsive and map-enabled UI.
+
+🚀 Live Demo: https://room-flat-rental-web-application.onrender.com/listings
+
+📸 Features
 ✅ Completed
-User registration and login (Passport.js)
+🔐 User Auth with Passport.js (Signup, Login, Logout)
 
-Flash messages for success/error feedback
+📬 Flash messages for success/error feedback
 
-Express-session-based login persistence
+🔄 Persistent login using express-session
 
-EJS templating with layout inheritance
+🎨 EJS + Bootstrap 5 templating with layout inheritance
 
-Bootstrap 5 responsive UI
+🧾 CRUD operations for hotel/room listings
 
-Form validation (client-side + server-side)
+✅ isOwner middleware for edit/delete access
 
-Listings CRUD with isOwner access control
+💬 Review system (Listing page shows all reviews via .populate('reviews'))
 
-Display reviews on listing page (populate('reviews'))
+✔️ Form validation (client-side and server-side)
 
-Error fixes:
+❌ Error handling for unauthorized or invalid access
 
-Model registration issue resolved
+🗺️ Map Features (Leaflet.js)
+🌍 Show listings on interactive map
 
-Populating currentUser in res.locals
+📍 Geolocation centering (navigator.geolocation)
 
-Flash messages for unauthorized access
+🗂️ Marker clustering for dense listings
 
-Enforced isLoggedIn and isOwner middleware
+🧠 Location search with Nominatim autocomplete
 
-⏳ In Progress
-🌍 Map functionality (Leaflet.js)
+🖥️ Fullscreen toggle support
 
-Center on user's geolocation via navigator.geolocation
+⚒️ Tech Stack
+Layer	Tech Stack
+Backend	Node.js, Express.js
+Frontend	EJS templating + Bootstrap 5
+Database	MongoDB + Mongoose ORM
+Auth	Passport.js (LocalStrategy)
+Maps	Leaflet.js, Nominatim, MarkerCluster
+Utilities	express-session, connect-flash
 
-Show multiple markers for all listings
-
-Marker clustering (leaflet.markercluster)
-
-Location search with autocomplete (Nominatim)
-
-Fullscreen toggle for map
-
-🛠️ Tech Stack
-Backend: Node.js, Express.js
-
-Authentication: Passport.js (LocalStrategy)
-
-Templating: EJS
-
-Database: MongoDB with Mongoose
-
-Styling: Bootstrap 5 + custom CSS
-
-Flash Messages: connect-flash
-
-Session: express-session
-
-Map API: Leaflet.js, Nominatim, MarkerCluster
-
-📦 Installation
+📦 Installation & Setup
+1️⃣ Clone the Repository
 bash
-Copy code
+Copy
+Edit
 git clone https://github.com/your-username/hotel-management
 cd hotel-management
+2️⃣ Install Dependencies
+bash
+Copy
+Edit
 npm install
-🔐 Environment Variables
-Create a .env file in the root directory:
+3️⃣ Set up Environment Variables
+Create a .env file in the project root with:
 
 env
-Copy code
+Copy
+Edit
 DB_URL=mongodb://localhost:27017/hotel-db
 SECRET=yourSecretKey
-▶️ Running the App
+💡 Use .env.example as a template if provided.
+
+4️⃣ Run the Server
 bash
-Copy code
+Copy
+Edit
 npm start
-Visit http://localhost:3000 in your browser.
+Visit http://localhost:3000/listings in your browser.
 
 🧪 Test Credentials
-Register a user at /signup
+You can register a new user at /signup, or log in with previously created users.
 
-Or log in with any user you've created.
+🔍 Search & Filter (In Progress)
+🔎 Search by location and keywords
 
-💬 Flash Message Usage
-Backend
+💸 Filter listings by min/max price
 
-js
-Copy code
-req.flash("success", `Welcome, ${user.username}!`);
-Frontend (EJS)
+🏷️ Sort by price (Low → High, High → Low)
 
-ejs
-Copy code
-<% if (success && success.length > 0) { %>
-  <% success.forEach(msg => { %>
-    <div class="alert alert-success alert-dismissible fade show">
-      <%= msg %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-  <% }) %>
-<% } %>
-🌐 Map Features (WIP)
-Implemented using Leaflet.js:
+📌 Still To Do
+⏳ Booking system (availability calendar, booking history)
 
-Map initialized on listing show page
+🧑‍💼 Admin dashboard
 
-Displaying marker based on listing coordinates
+🛡️ Role-based access control
 
-[In Progress]
+🧪 Full test coverage
 
-Auto-center on user's location (navigator.geolocation)
+📱 Mobile map UI polish
 
-Show all listings on index map
+🗃️ Folder Structure
+arduino
+Copy
+Edit
+hotel-management/
+├── models/
+├── routes/
+├── views/
+│   ├── includes/
+│   └── listings/
+├── public/
+│   └── stylesheets/
+├── utils/
+├── .env
+├── .gitignore
+├── app.js
+🛑 Don't Forget
+Make sure .env is added to .gitignore:
 
-Marker clustering (leaflet.markercluster)
+gitignore
+Copy
+Edit
+.env
+node_modules/
+If mistakenly pushed, remove with:
 
-Autocomplete address search (Nominatim)
+bash
+Copy
+Edit
+git rm --cached .env
+🌐 Hosted On
+🔗 Render
+Live URL:https://room-flat-rental-web-application.onrender.com/listings
 
-Fullscreen toggle option
+🤝 Contributing
 
 
-⚠️ Still To Do
-Booking system (not implemented yet)
 
-Role-based access (not in project yet)
 
-Admin dashboard (not planned yet)
 
-Full validations and polished UI
 
-Search & filter listings
 
-Mobile/responsive map UI improvements
 
-Better error handling & test coverage
+Ask ChatGPT
+
