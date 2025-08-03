@@ -1,9 +1,7 @@
-<nav class="navbar navbar-expand-md custom-navbar sticky-top shadow">
+<nav class="navbar navbar-expand-md navbar-light bg-white sticky-top shadow">
     <div class="container-fluid">
         <!-- Brand -->
-        <a class="navbar-brand text-white" href="/listings">
-            <i class="fa-solid fa-hotel"></i> HotelApp
-        </a>
+        <a class="navbar-brand text-white" href="/listings"><i class="fa-solid fa-hotel"></i> HotelApp</a>
 
         <!-- Toggler for mobile -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -15,21 +13,27 @@
         <div class="collapse navbar-collapse custom-collapse" id="navbarNavAltMarkup">
             <!-- Left links -->
             <div class="navbar-nav me-auto">
-                <a class="nav-link" href="/listings"><i class="fa-solid fa-compass"></i> Explore</a>
+                <a class="nav-link" href="/listings">Explore</a>
             </div>
 
-            <!-- Right links -->
-            <!-- <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="/listings/new"><i class="fa-solid fa-plus"></i> Add New Listing</a> -->
+            <!-- 🔍 Search form -->
+            <form class="d-flex me-3" action="/listings/search" method="GET">
+                <input class="form-control me-2" type="search" name="q" placeholder="Search hotels..."
+                    aria-label="Search">
+                <button class="btn btn-outline-danger" type="submit">Search</button>
+            </form>
 
-            <% if (!currentUser) { %>
-                <a class="nav-link" href="/signup"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
-                <a class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
-                <% } else { %>
-                    <span class="navbar-text me-2">Hello, <%= currentUser.username %></span>
-                    <a class="nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-                    <% } %>
+            <!-- Right links -->
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/listings/new">Add New Listing</a>
+                <% if (!currentUser) { %>
+                    <a class="nav-link" href="/signup">Sign Up</a>
+                    <a class="nav-link" href="/login">Login</a>
+                    <% } else { %>
+                        <span class="navbar-text me-2">Hello, <%= currentUser.username %></span>
+                        <a class="nav-link" href="/logout">Logout</a>
+                        <% } %>
+            </div>
         </div>
-    </div>
     </div>
 </nav>
