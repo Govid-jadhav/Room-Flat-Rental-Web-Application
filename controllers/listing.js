@@ -112,3 +112,33 @@ module.exports.deletelisting = async (req, res) => {
     req.flash("success", "Listing deleted");
     res.redirect("/listings");
 };
+
+// controllers/listings.js
+module.exports.index = async (req, res) => {
+    const { q, minPrice, maxPrice, sortBy } = req.query;
+    let filter = {};
+    let sort = {};
+
+    // Keyword search (title or location)
+    if (q) {
+        filter.$or = [
+            { title: { $regex: q, $options: "i" } },
+            { location: { $regex: q, $options: "i" } },
+            { country: { $regex: q, $options: "i" } }
+        ];
+    }
+
+    // Price filter
+    if (minPrice || maxPrice) {
+        filter.price = {};
+        if (minPrice) filter.price.$gte = parseInt(minPrice);
+        if (maxPrice) filter.price.$lte = parseInt(maxPrice);
+    }
+
+    // Sorting logic
+    if (sortBy === "priceLowToHigh") sort.price = 1;
+    else if (sortBy === "priceHighToLow") sort.price = -1;
+
+    const listings = await Listing.find(filter).sort(sort);
+    res.render("index.ejs", { allListings: listings });
+};

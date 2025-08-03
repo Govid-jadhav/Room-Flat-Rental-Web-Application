@@ -32,6 +32,24 @@ router.get("/:id/edit",
     wrapAsync(listingControllers.editListing)
 );
 
+
+// 🔍 Search Route
+router.get("/search", async (req, res) => {
+    const { q } = req.query;
+
+    // Basic search in 'title' or 'location' (case-insensitive)
+    const listings = await Listing.find({
+        $or: [
+            { title: { $regex: q, $options: "i" } },
+            { location: { $regex: q, $options: "i" } }
+        ]
+    });
+
+    res.render("searchResults", { listings, query: q });
+});
+
+module.exports = router;
+
 router
     .route("/:id")
     .put(

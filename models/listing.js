@@ -35,6 +35,13 @@ const listingSchema = new mongoose.Schema({
     },
 });
 
+// 📌 OPTIONAL: Add a text index for search performance
+listingSchema.index({
+    title: "text",
+    location: "text",
+    country: "text"
+});
+
 // Cascade delete associated reviews on listing deletion
 listingSchema.post("findOneAndDelete", async (listing) => {
     if (listing) {
