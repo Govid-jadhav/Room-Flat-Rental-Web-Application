@@ -1,3 +1,4 @@
+🏨 Hotel Management Web App
 A full-stack hotel/room listing platform built with Node.js, Express, MongoDB, and Bootstrap. Users can register, list properties, leave reviews, and search/filter results with a responsive and map-enabled UI.
 
 🚀 Live Demo: https://room-flat-rental-web-application.onrender.com/listings
@@ -124,16 +125,4 @@ Edit
 git rm --cached .env
 🌐 Hosted On
 🔗 Render
-Live URL:https://room-flat-rental-web-application.onrender.com/listings
-
-🤝 Contributing
-
-
-
-
-
-
-
-
-Ask ChatGPT
-
+Live URL: https://room-flat-rental-web-application.onrender.com/listings
