@@ -1,14 +1,17 @@
 /* Navbar Styling */
 .navbar {
     height: 5rem;
-    background-color: rgb(128, 59, 59);
-    /* Dark maroon background */
+    background-color: #ffffff !important;
+    /* White background */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    /* Black shadow */
 }
 
 /* Navbar brand (hotel icon/logo) */
 .navbar .navbar-brand {
-    color: white !important;
+    color: rgb(0, 0, 0) !important;
     /* Brand text/icon in white */
+    font-weight: bold;
 }
 
 /* Font Awesome hotel icon (fixing selector) */
@@ -19,14 +22,14 @@
 
 /* Navbar link text */
 .navbar .nav-link {
-    color: white !important;
-    /* All links in navbar white */
+    color: #000 !important;
+    /* All links in navbar black */
 }
 
 /* Hover effect for navbar links */
 .navbar .nav-link:hover {
-    color: #ffb3b3 !important;
-    /* Light red on hover */
+    color: #555 !important;
+    /* Slightly darker on hover */
 }
 
 /* Footer Styling */
@@ -144,7 +147,6 @@
 @media (max-width: 767.98px) {
     .custom-collapse {
         background-color: #212529;
-        /* Dark sidebar background */
         position: absolute;
         top: 100%;
         left: 0;
@@ -153,13 +155,11 @@
         padding: 1rem;
     }
 
-    /* Make nav text in sidebar white */
     .custom-collapse .nav-link,
     .custom-collapse .navbar-text {
         color: white !important;
     }
 
-    /* Optional: make body darker when menu opens (JS required to toggle class) */
     body.menu-open {
         background-color: #000 !important;
     }
