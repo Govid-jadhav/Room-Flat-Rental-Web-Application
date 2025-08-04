@@ -76,7 +76,7 @@ const sessionOptions = {
 };
 
 app.get("/", (req, res) => {
-    res.redirect("/main.ejs");
+    res.render("main"); // Don't include .ejs
 });
 
 
