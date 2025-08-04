@@ -42,83 +42,64 @@
 
 /* Footer Styling */
 .footer {
-    background: #f7f7f7;
+    background-color: #ffffff;
+    color: #212529;
     padding: 40px 0 20px 0;
-    font-family: Arial, sans-serif;
-    color: #222;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.95rem;
+    border-top: 1px solid #e0e0e0;
 }
 
-.footer-top {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    max-width: 1100px;
-    margin: 0 auto 32px auto;
-    border-bottom: 1px solid #e7e7e7;
-    padding-bottom: 30px;
+/* Footer separator (hr) */
+.footer hr {
+    border-top: 1px solid #ddd;
+    margin-bottom: 30px;
 }
 
-.footer-section {
-    flex: 1 1 200px;
-    margin: 0 20px 20px 0;
-    min-width: 200px;
-}
-
-.footer-section h3 {
-    font-size: 1.1em;
-    font-weight: bold;
-    margin-bottom: 16px;
-}
-
-.footer-section ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.footer-section ul li {
-    margin-bottom: 10px;
-}
-
-.footer-section ul li a {
-    color: #222;
+/* Footer Links */
+.footer a {
+    color: #555;
     text-decoration: none;
-    transition: text-decoration 0.2s;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
 }
 
-.footer-section ul li a:hover {
+.footer a:hover {
+    color: #000;
     text-decoration: underline;
 }
 
-.footer-bottom {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding-top: 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    font-size: 0.92em;
-    color: #888;
-    border-top: 1px solid #e7e7e7;
+/* Footer Options */
+.footer-options a {
+    font-weight: 500;
+    font-size: 0.95rem;
 }
 
-.footer-bottom a {
-    color: #222;
-    margin-left: 14px;
-    text-decoration: none;
+/* Footer Social Icons */
+.footer-social a {
+    font-size: 1.2rem;
+    color: #555;
+    transition: color 0.3s ease;
 }
 
-.footer-bottom a:hover,
-.footer-bottom .social-icon:hover {
-    color: #FF385C;
+.footer-social a:hover {
+    color: #000;
 }
 
-.footer-media .social-icon {
-    font-size: 1.3em;
-    margin-left: 12px;
-    vertical-align: middle;
-    transition: color 0.2s;
+/* Responsive Alignments */
+@media (max-width: 767.98px) {
+
+    .footer .footer-options,
+    .footer .footer-social {
+        justify-content: center !important;
+    }
+
+    .footer .text-md-start {
+        text-align: center !important;
+    }
+
+    .footer .align-items-md-end {
+        align-items: center !important;
+    }
 }
 
 /* Cards */
@@ -177,20 +158,16 @@
 @media (max-width: 767.98px) {
     .custom-collapse {
         background-color: #212529;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
         padding: 1rem;
     }
 
     .custom-collapse .nav-link,
-    .custom-collapse .navbar-text {
+    .custom-collapse .navbar-text,
+    .custom-collapse .btn {
         color: white !important;
     }
 
-    body.menu-open {
-        background-color: #000 !important;
+    .custom-collapse .btn-outline-primary {
+        border-color: white;
     }
 }
