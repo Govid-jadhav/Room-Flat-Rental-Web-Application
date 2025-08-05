@@ -400,25 +400,7 @@
                 </div>
 
                 <!-- Right links -->
-                <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-                    <% if (!currentUser) { %>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-primary me-2 fw-semibold" href="/signup">Sign Up</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-primary fw-semibold" href="/login">Login</a>
-                        </li>
-                        <% } else { %>
-                            <li class="nav-item d-flex align-items-center me-2 text-dark">
-                                Hello, <strong class="ms-1">
-                                    <%= currentUser.username %>
-                                </strong>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-outline-danger fw-semibold" href="/logout">Logout</a>
-                            </li>
-                            <% } %>
-                </ul>
+
             </div>
         </div>
     </nav>
