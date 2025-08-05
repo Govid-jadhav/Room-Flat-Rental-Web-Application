@@ -12,13 +12,15 @@
     <!-- Embedded Custom CSS -->
     <style>
         /* ====== General Reset ====== */
-        body,
-        html {
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Poppins', sans-serif;
             box-sizing: border-box;
-            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
         }
 
         /* ====== Hero Section ====== */
@@ -29,53 +31,54 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
             text-align: center;
+            position: relative;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 1;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
         }
 
         .hero-content {
             position: relative;
-            z-index: 2;
-            padding: 20px;
+            z-index: 1;
             max-width: 700px;
+            padding: 20px;
         }
 
         .hero h1 {
             font-size: 3rem;
-            font-weight: 700;
             margin-bottom: 15px;
         }
 
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             margin-bottom: 20px;
         }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
+        .btn {
+            background-color: #fe424d;
+            color: #fff;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
 
-            .hero p {
-                font-size: 1rem;
-            }
+        .btn:hover {
+            background-color: #dc2c3b;
         }
 
         /* ====== Features Section ====== */
         .features {
-            padding: 60px 15px;
             background-color: #f8f9fa;
+            padding: 60px 15px;
+            text-align: center;
         }
 
         .features h2 {
@@ -84,14 +87,21 @@
             margin-bottom: 40px;
         }
 
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
         .feature-box {
-            background: #ffffff;
+            background: #fff;
             border-radius: 12px;
-            padding: 25px 20px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 25px 20px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            height: 100%;
-            text-align: center;
+            width: 100%;
+            max-width: 320px;
         }
 
         .feature-box:hover {
@@ -99,57 +109,36 @@
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
         }
 
-        .feature-box .icon {
+        .icon {
             font-size: 2.5rem;
             color: #fe424d;
             margin-bottom: 15px;
         }
 
         /* ====== CTA Section ====== */
-        section.py-5.text-center {
-            background: #fff;
-            padding: 60px 15px;
+        .cta {
+            background-color: #fff;
+            padding: 60px 20px;
+            text-align: center;
         }
 
-        section.py-5.text-center h3 {
+        .cta h3 {
             font-size: 1.75rem;
-            font-weight: 600;
-        }
-
-        @media (max-width: 768px) {
-            section.py-5.text-center h3 {
-                font-size: 1.4rem;
-            }
-        }
-
-        /* ====== Buttons ====== */
-        .btn-primary {
-            background-color: #fe424d;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #dc2c3b;
+            margin-bottom: 20px;
         }
 
         /* ====== Footer ====== */
         .footer {
             background-color: #f1f1f1;
-            text-align: center;
             padding: 20px 15px;
+            text-align: center;
             font-size: 0.9rem;
             color: #6c757d;
         }
 
         .footer a {
             color: #6c757d;
-            margin: 0 5px;
+            margin: 0 8px;
             text-decoration: none;
         }
 
@@ -157,44 +146,54 @@
             text-decoration: underline;
         }
 
-        /* ====== Utility ====== */
-        .container {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 0 15px;
+        /* ====== Responsive ====== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .feature-box {
+                max-width: 100%;
+            }
+
+            .cta h3 {
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <!-- Navbar include here if needed -->
-
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content text-white">
+        <div class="hero-content">
             <h1>Stayra: Your Stay, Your Way</h1>
             <p>Find and manage perfect stays across the country – easy, secure, and reliable.</p>
-            <a href="/listings" class="btn btn-primary btn-lg">Explore Listings</a>
+            <a href="/listings" class="btn">Explore Listings</a>
         </div>
     </section>
 
-    <!-- Features -->
-    <section class="features py-5 bg-light">
-        <div class="container text-center">
-            <h2 class="mb-4">Why Choose Stayra?</h2>
-            <div class="row g-4">
-                <div class="col-md-4 feature-box">
-                    <div class="icon mb-2"><i class="fas fa-bed"></i></div>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Why Choose Stayra?</h2>
+            <div class="row">
+                <div class="feature-box">
+                    <div class="icon"><i class="fas fa-bed"></i></div>
                     <h5>Comfortable Listings</h5>
                     <p>Verified and curated rooms and apartments for all budgets.</p>
                 </div>
-                <div class="col-md-4 feature-box">
-                    <div class="icon mb-2"><i class="fas fa-calendar-check"></i></div>
+                <div class="feature-box">
+                    <div class="icon"><i class="fas fa-calendar-check"></i></div>
                     <h5>Easy Booking</h5>
                     <p>Instant availability checks and hassle-free reservations.</p>
                 </div>
-                <div class="col-md-4 feature-box">
-                    <div class="icon mb-2"><i class="fas fa-lock"></i></div>
+                <div class="feature-box">
+                    <div class="icon"><i class="fas fa-lock"></i></div>
                     <h5>Secure Management</h5>
                     <p>Reliable backend with secure login, roles, and access control.</p>
                 </div>
@@ -202,12 +201,10 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-5 text-center">
-        <div class="container">
-            <h3>Ready to find your next perfect stay?</h3>
-            <a href="/signup" class="btn btn-primary btn-lg mt-3">Join Now</a>
-        </div>
+    <!-- CTA -->
+    <section class="cta">
+        <h3>Ready to find your next perfect stay?</h3>
+        <a href="/signup" class="btn">Join Now</a>
     </section>
 
     <!-- Footer -->
