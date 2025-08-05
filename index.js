@@ -51,10 +51,10 @@ app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-app.use((req, res, next) => {
-    res.locals.currentUser = req.user || null;
-    next();
-});
+// app.use((req, res, next) => {
+//     res.locals.currentUser = req.user || null;
+//     next();
+// });
 
 
 const store = MongoStore.create({
