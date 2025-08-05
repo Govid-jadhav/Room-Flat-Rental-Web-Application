@@ -164,10 +164,264 @@
                 font-size: 1.4rem;
             }
         }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            height: 5rem;
+            background-color: #ffffff !important;
+            /* White background */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            /* Black shadow */
+        }
+
+        /* Navbar brand (hotel icon/logo) */
+        .navbar .navbar-brand {
+            color: rgb(0, 0, 0) !important;
+            /* Brand text/icon in white */
+            font-weight: bold;
+        }
+
+        /* Font Awesome hotel icon (fixing selector) */
+        .fa-hotel {
+            color: #fe424d;
+            font-size: 2rem;
+        }
+
+        .navbar .btn {
+            padding: 0.375rem 0.75rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-radius: 0.3rem;
+        }
+
+        /* Navbar link text */
+        .navbar .nav-link {
+            color: #000 !important;
+            font-weight: 500;
+            /* All links in navbar black */
+        }
+
+        /* Hover effect for navbar links */
+        .navbar .nav-link:hover {
+            color: #555 !important;
+            /* Slightly darker on hover */
+        }
+
+        /* Footer Styling */
+        .footer {
+            background-color: #ffffff;
+            color: #212529;
+            padding: 40px 0 20px 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 0.95rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* Footer separator (hr) */
+        .footer hr {
+            border-top: 1px solid #ddd;
+            margin-bottom: 30px;
+        }
+
+        /* Footer Links */
+        .footer a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.2s ease, text-decoration 0.2s ease;
+        }
+
+        .footer a:hover {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        /* Footer Options */
+        .footer-options a {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        /* Footer Social Icons */
+        .footer-social a {
+            font-size: 1.2rem;
+            color: #555;
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: #000;
+        }
+
+        /* Responsive Alignments */
+        @media (max-width: 767.98px) {
+
+            .footer .footer-options,
+            .footer .footer-social {
+                justify-content: center !important;
+            }
+
+            .footer .text-md-start {
+                text-align: center !important;
+            }
+
+            .footer .align-items-md-end {
+                align-items: center !important;
+            }
+        }
+
+        /* Cards */
+        .card-img-top {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card-img-top:hover {
+            transform: scale(1.05);
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Buttons */
+        .btn1 {
+            background-color: #fe424d;
+            border: none !important;
+            color: white;
+        }
+
+        /* Flash alert styling */
+        .alert-glass {
+            background-color: rgba(255, 255, 255, 0.15) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .advanced-search-box {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 1rem;
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .advanced-search-box {
+                width: 100vw;
+                left: -15px;
+                border-radius: 0;
+            }
+        }
+
+
+        /* Mobile responsive navbar (sidebar) */
+        @media (max-width: 767.98px) {
+            .custom-collapse {
+                background-color: #212529;
+                padding: 1rem;
+            }
+
+            .custom-collapse .nav-link,
+            .custom-collapse .navbar-text,
+            .custom-collapse .btn {
+                color: white !important;
+            }
+
+            .custom-collapse .btn-outline-primary {
+                border-color: white;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top shadow">
+        <div class="container-fluid">
+            <!-- Brand -->
+            <a class="navbar-brand d-flex align-items-center" href="/listings">
+                <i class="fa-solid fa-hotel me-2 text-danger fs-4"></i>
+                <span class="fw-bold text-dark">Stayra</span>
+            </a>
+
+            <!-- Toggler for mobile -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse custom-collapse" id="navbarNavAltMarkup">
+
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="/listings">Explore</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="/listings/new">Add New Listing</a>
+                    </li>
+                </ul>
+
+                <!-- Search Bar -->
+                <div class="d-flex align-items-center position-relative me-3">
+                    <form class="d-flex" action="/listings" method="GET">
+                        <input class="form-control me-2" type="search" name="q" placeholder="Search hotels..."
+                            aria-label="Search" data-bs-toggle="collapse" data-bs-target="#advancedSearch"
+                            aria-expanded="false" aria-controls="advancedSearch">
+                        <button class="btn btn-outline-danger fw-semibold" type="submit">Search</button>
+                    </form>
+
+                    <!-- Advanced Search -->
+                    <div class="collapse advanced-search-box" id="advancedSearch">
+                        <form class="d-flex flex-wrap gap-2 mt-2" action="/listings" method="GET">
+                            <input type="hidden" name="q" value="">
+                            <input class="form-control" type="number" name="minPrice" placeholder="Min Price">
+                            <input class="form-control" type="number" name="maxPrice" placeholder="Max Price">
+                            <select class="form-select" name="sortBy">
+                                <option value="">Sort</option>
+                                <option value="priceLowToHigh">Price: Low to High</option>
+                                <option value="priceHighToLow">Price: High to Low</option>
+                            </select>
+                            <button class="btn btn-danger" type="submit">Apply</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right links -->
+                <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                    <% if (!currentUser) { %>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-primary me-2 fw-semibold" href="/signup">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary fw-semibold" href="/login">Login</a>
+                        </li>
+                        <% } else { %>
+                            <li class="nav-item d-flex align-items-center me-2 text-dark">
+                                Hello, <strong class="ms-1">
+                                    <%= currentUser.username %>
+                                </strong>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-danger fw-semibold" href="/logout">Logout</a>
+                            </li>
+                            <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
@@ -208,11 +462,43 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        &copy; 2025 Stayra &middot;
-        <a href="#">Privacy</a> &middot;
-        <a href="#">Terms</a> &middot;
-        <a href="#">Sitemap</a>
+    <footer class="footer bg-white text-dark mt-5 pt-4 border-top">
+        <div class="container">
+            <!-- Separator -->
+            <hr class="mb-4">
+
+            <div class="row align-items-center text-center text-md-start">
+
+                <!-- Left Section -->
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <div class="mb-2">
+                        &copy; 2025 <strong>Stayra</strong>. All rights reserved.
+                    </div>
+                    <div class="footer-links d-flex flex-wrap justify-content-center justify-content-md-start gap-3">
+                        <a href="#" class="text-decoration-none text-muted">Privacy</a>
+                        <a href="#" class="text-decoration-none text-muted">Terms</a>
+                        <a href="#" class="text-decoration-none text-muted">Sitemap</a>
+                        <a href="#" class="text-decoration-none text-muted">Company</a>
+                    </div>
+                </div>
+
+                <!-- Right Section -->
+                <div class="col-md-6 d-flex flex-column align-items-center align-items-md-end gap-2">
+                    <div class="footer-options d-flex gap-3 flex-wrap justify-content-center justify-content-md-end">
+                        <a href="#" class="text-decoration-none text-muted"><span>&#127760;</span> English (IN)</a>
+                        <a href="#" class="text-decoration-none text-muted"><span>&#8377;</span> INR</a>
+                    </div>
+                    <div class="footer-social d-flex gap-3">
+                        <a href="#" aria-label="Facebook" class="text-muted fs-5"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter" class="text-muted fs-5"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram" class="text-muted fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn" class="text-muted fs-5"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="YouTube" class="text-muted fs-5"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </footer>
 </body>
 
