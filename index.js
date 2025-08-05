@@ -77,7 +77,7 @@ const sessionOptions = {
 };
 
 app.get("/", (req, res) => {
-    render("main")
+    res.render("main.ejs");
 });
 
 
