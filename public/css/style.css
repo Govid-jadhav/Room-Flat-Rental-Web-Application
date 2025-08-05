@@ -1,3 +1,7 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
 /* Navbar Styling */
 .navbar {
     height: 5rem;

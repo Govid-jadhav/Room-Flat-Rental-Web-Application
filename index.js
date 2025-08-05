@@ -28,7 +28,6 @@ const { storage } = require("./cloudConfig");
 // const upload = multer({ storage });
 
 const User = require("./models/user.js");
-const { render } = require("ejs");
 
 
 
@@ -77,7 +76,8 @@ const sessionOptions = {
 };
 
 app.get("/", (req, res) => {
-    res.render("main.ejs");
+    res.render("main");
+    // res.redirect("/listings");
 });
 
 
