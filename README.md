@@ -1,102 +1,114 @@
-🏨 Hotel Management Web App
-A full-stack hotel/room listing platform built with Node.js, Express, MongoDB, and Bootstrap. Users can register, list properties, leave reviews, and search/filter results with a responsive and map-enabled UI.
+Stayra - Travel & Listing Platform
+A full-stack travel and property listing web app where users can discover and post accommodations for their trips. Built with Node.js, Express, and MongoDB, Stayra makes finding or sharing a stay seamless, with map-based exploration, user authentication, and review functionality.
 
-🚀 Live Demo: https://room-flat-rental-web-application.onrender.com
+🔗 Live Demo: https://room-flat-rental-web-application.onrender.com
 
-📸 Features
+🌟 Features
 ✅ Completed
-🔐 User Auth with Passport.js (Signup, Login, Logout)
+🔐 User Authentication
 
-📬 Flash messages for success/error feedback
+Signup, Login, Logout using Passport.js
 
-🔄 Persistent login using express-session
+Persistent sessions with express-session
 
-🎨 EJS + Bootstrap 5 templating with layout inheritance
+Flash messaging for real-time feedback
 
-🧾 CRUD operations for hotel/room listings
+🏘️ Listings Management
 
-✅ isOwner middleware for edit/delete access
+Users can create, view, edit, and delete travel property listings
 
-💬 Review system (Listing page shows all reviews via .populate('reviews'))
+Ownership-based access with isOwner middleware
 
-✔️ Form validation (client-side and server-side)
+Full CRUD with validation
 
-❌ Error handling for unauthorized or invalid access
+💬 Review System
 
-🗺️ Map Features (Leaflet.js)
-🌍 Show listings on interactive map
+Leave and view reviews on listing pages
 
-📍 Geolocation centering (navigator.geolocation)
+Integrated with MongoDB via .populate('reviews')
 
-🗂️ Marker clustering for dense listings
+🗺️ Interactive Map Features
 
-🧠 Location search with Nominatim autocomplete
+Browse listings on an interactive Leaflet.js map
 
-🖥️ Fullscreen toggle support
+Auto-centered via navigator.geolocation
 
-⚒️ Tech Stack
-Layer	Tech Stack
+Clustering for dense locations
+
+Location search using Nominatim autocomplete
+
+Fullscreen map support for immersive travel planning
+
+✔️ Responsive Design
+
+Mobile-friendly UI using EJS templates + Bootstrap 5
+
+🛠️ Robust Error Handling
+
+Catch unauthorized access and form errors gracefully
+
+Server and client-side validation
+
+⚙️ Tech Stack
+Layer	Stack
 Backend	Node.js, Express.js
-Frontend	EJS templating + Bootstrap 5
-Database	MongoDB + Mongoose ORM
+Frontend	EJS templating, Bootstrap 5
+Database	MongoDB with Mongoose ORM
 Auth	Passport.js (LocalStrategy)
 Maps	Leaflet.js, Nominatim, MarkerCluster
 Utilities	express-session, connect-flash
 
-📦 Installation & Setup
-1️⃣ Clone the Repository
+🧑‍💻 Setup Instructions
+1️⃣ Clone the Repo
 bash
-Copy
-Edit
+Copy code
 git clone https://github.com/your-username/hotel-management
 cd hotel-management
 2️⃣ Install Dependencies
 bash
-Copy
-Edit
+Copy code
 npm install
-3️⃣ Set up Environment Variables
-Create a .env file in the project root with:
+3️⃣ Configure Environment
+Create a .env file:
 
 env
-Copy
-Edit
-DB_URL=mongodb://localhost:27017/hotel-db
+Copy code
+DB_URL=mongodb://localhost:27017/stayra-db
 SECRET=yourSecretKey
-💡 Use .env.example as a template if provided.
+✅ Make sure .env is added to .gitignore
 
-4️⃣ Run the Server
+4️⃣ Start the Application
 bash
-Copy
-Edit
+Copy code
 npm start
-Visit http://localhost:3000/listings in your browser.
+Visit: http://localhost:3000/listings
 
-🧪 Test Credentials
-You can register a new user at /signup, or log in with previously created users.
+👤 Test Credentials
+You can register at /signup or use any previously created accounts.
 
-🔍 Search & Filter (In Progress)
-🔎 Search by location and keywords
+🔍 Upcoming Enhancements
+🚧 In Progress
 
-💸 Filter listings by min/max price
+🔍 Search by location/keywords
 
-🏷️ Sort by price (Low → High, High → Low)
+💸 Filter by price range
 
-📌 Still To Do
-⏳ Booking system (availability calendar, booking history)
+🏷️ Sort by price
+
+🎯 Planned Features
+
+📅 Booking system with calendar availability
 
 🧑‍💼 Admin dashboard
 
-🛡️ Role-based access control
+🛡️ Role-based access control (Admin / Traveler)
 
-🧪 Full test coverage
+✅ Full test coverage
 
-📱 Mobile map UI polish
+📱 Mobile map UI improvements
 
-🗃️ Folder Structure
-arduino
-Copy
-Edit
+
+📁 Folder Structure
 hotel-management/
 ├── models/
 ├── routes/
@@ -106,23 +118,11 @@ hotel-management/
 ├── public/
 │   └── stylesheets/
 ├── utils/
-├── .env
-├── .gitignore
 ├── app.js
-🛑 Don't Forget
-Make sure .env is added to .gitignore:
+├── .env
 
-gitignore
-Copy
-Edit
-.env
-node_modules/
-If mistakenly pushed, remove with:
 
-bash
-Copy
-Edit
-git rm --cached .env
-🌐 Hosted On
-🔗 Render
-Live URL: https://room-flat-rental-web-application.onrender.com
+🌐 Deployment
+Hosted on Render
+🔗 Live Site
+
