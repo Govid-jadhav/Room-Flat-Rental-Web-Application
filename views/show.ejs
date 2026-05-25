@@ -132,12 +132,48 @@
                                                 </div>
                                             </div>
                                             <% } %>
-                                    </div>
                                 </div>
-                                <div id="map" style="height: 400px;" class="mb-3"></div>
+
+                                <!-- Premium Map Section -->
+                                <div class="mt-5 mb-5">
+                                    <h4 class="fw-bold text-dark mb-3">
+                                        <i class="fa-solid fa-map-location-dot text-danger me-1"></i> Where you'll be
+                                    </h4>
+                                    <div id="map" style="height: 380px; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); z-index: 1;" class="mb-3"></div>
+                                </div>
 
             </div>
         </div>
     </div>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js">
+    
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Safe coordinates parsing: GeoJSON is [lng, lat]
+            const geometry = <%- JSON.stringify(listing.geometry) %>;
+            let coords = [75.7139, 19.7515]; // Default fallback coordinates (Maharashtra/India region)
+            
+            if (geometry && geometry.coordinates && geometry.coordinates.length === 2) {
+                coords = geometry.coordinates;
+            }
+            
+            const lat = coords[1];
+            const lng = coords[0];
+            
+            // Initialize Leaflet map centered on listing coordinates
+            const map = L.map('map').setView([lat, lng], 13);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            
+            // Add premium popup marker
+            const marker = L.marker([lat, lng]).addTo(map);
+            marker.bindPopup(`
+                <div style="font-family: 'Poppins', sans-serif; padding: 0.25rem;">
+                    <strong style="color: var(--primary); font-size: 0.95rem; display: block; margin-bottom: 0.15rem;"><%= listing.title %></strong>
+                    <span style="color: #555; font-size: 0.8rem; display: block;"><i class="fa-solid fa-location-dot me-1"></i> <%= listing.location %></span>
+                </div>
+            `).openPopup();
+        });
     </script>

@@ -1,75 +1,99 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white sticky-top shadow">
-    <div class="container-fluid">
-        <!-- Brand -->
+<nav class="navbar navbar-expand-md navbar-light sticky-top shadow-sm">
+    <div class="container-fluid px-md-5">
+        <!-- High-fidelity Brand Logo -->
         <a class="navbar-brand d-flex align-items-center" href="/listings">
-            <i class="fa-solid fa-hotel me-2 text-danger fs-4"></i>
-            <span class="fw-bold text-dark">Stayra</span>
+            <i class="fa-solid fa-compass me-2"></i>
+            <span class="fw-extrabold text-dark" style="letter-spacing: -0.5px;">Stayra</span>
         </a>
 
-        <!-- Toggler for mobile -->
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+        <!-- Custom mobile toggle button -->
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Collapsible content -->
+        <!-- Collapsible Menu -->
         <div class="collapse navbar-collapse custom-collapse" id="navbarNavAltMarkup">
-
-            <!-- Left links -->
+            
+            <!-- Left navigation options -->
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold" href="/listings">Explore</a>
+                    <a class="nav-link" href="/listings"><i class="fa-solid fa-globe me-1"></i> Explore</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold" href="/listings/new">Add New Listing</a>
+                    <a class="nav-link" href="/listings/new"><i class="fa-solid fa-circle-plus me-1"></i> Share Your Space</a>
                 </li>
             </ul>
 
-            <!-- Search Bar -->
-            <div class="d-flex align-items-center position-relative me-3">
-                <form class="d-flex" action="/listings" method="GET">
-                    <input class="form-control me-2" type="search" name="q" placeholder="Search hotels..."
-                        aria-label="Search" data-bs-toggle="collapse" data-bs-target="#advancedSearch"
-                        aria-expanded="false" aria-controls="advancedSearch">
-                    <button class="btn btn-outline-danger fw-semibold" type="submit">Search</button>
-                </form>
+            <!-- Dynamic Capsule Search Bar -->
+            <div class="d-flex align-items-center position-relative me-md-4 mb-3 mb-md-0">
+                <div class="search-container">
+                    <form class="d-flex" action="/listings" method="GET">
+                        <input class="form-control search-input" type="search" name="q" placeholder="Search hotels, stays..."
+                            aria-label="Search" data-bs-toggle="collapse" data-bs-target="#advancedSearch"
+                            aria-expanded="false" aria-controls="advancedSearch">
+                        <button class="search-btn" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                </div>
 
-                <!-- Advanced Search -->
+                <!-- Advanced Search Dropdown overlay -->
                 <div class="collapse advanced-search-box" id="advancedSearch">
-                    <form class="d-flex flex-wrap gap-2 mt-2" action="/listings" method="GET">
+                    <form class="d-flex flex-column gap-3" action="/listings" method="GET">
+                        <div class="fw-bold text-dark border-bottom pb-2 mb-1" style="font-size: 0.9rem;">
+                            <i class="fa-solid fa-sliders me-1"></i> Advanced Filters
+                        </div>
                         <input type="hidden" name="q" value="">
-                        <input class="form-control" type="number" name="minPrice" placeholder="Min Price">
-                        <input class="form-control" type="number" name="maxPrice" placeholder="Max Price">
-                        <select class="form-select" name="sortBy">
-                            <option value="">Sort</option>
-                            <option value="priceLowToHigh">Price: Low to High</option>
-                            <option value="priceHighToLow">Price: High to Low</option>
-                        </select>
-                        <button class="btn btn-danger" type="submit">Apply</button>
+                        
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <label class="form-label text-muted fw-bold" style="font-size: 0.75rem; text-transform: uppercase;">Min Price (₹)</label>
+                                <input class="form-control" type="number" name="minPrice" placeholder="Min" style="border-radius: 8px;">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label text-muted fw-bold" style="font-size: 0.75rem; text-transform: uppercase;">Max Price (₹)</label>
+                                <input class="form-control" type="number" name="maxPrice" placeholder="Max" style="border-radius: 8px;">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="form-label text-muted fw-bold" style="font-size: 0.75rem; text-transform: uppercase;">Sort Results</label>
+                            <select class="form-select" name="sortBy" style="border-radius: 8px;">
+                                <option value="">Default sorting</option>
+                                <option value="priceLowToHigh">Price: Low to High</option>
+                                <option value="priceHighToLow">Price: High to Low</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-primary-custom w-100 mt-2" type="submit" style="padding: 0.5rem;">
+                            Apply Parameters
+                        </button>
                     </form>
                 </div>
             </div>
 
-            <!-- Right links -->
-            <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+            <!-- Right user session controls -->
+            <ul class="navbar-nav ms-auto align-items-md-center gap-2 mb-2 mb-md-0">
                 <% if (!currentUser) { %>
                     <li class="nav-item">
-                        <a class="btn btn-outline-primary me-2 fw-semibold" href="/signup">Sign Up</a>
+                        <a class="btn btn-outline-custom w-100" href="/signup"><i class="fa-solid fa-user-plus me-1"></i> Sign Up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary fw-semibold" href="/login">Login</a>
+                        <a class="btn btn-primary-custom w-100" href="/login"><i class="fa-solid fa-right-to-bracket me-1"></i> Login</a>
                     </li>
-                    <% } else { %>
-                        <li class="nav-item d-flex align-items-center me-2 text-dark">
-                            Hello, <strong class="ms-1">
-                                <%= currentUser.username %>
-                            </strong>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-danger fw-semibold" href="/logout">Logout</a>
-                        </li>
-                        <% } %>
+                <% } else { %>
+                    <li class="nav-item d-flex align-items-center me-2 text-dark font-semibold">
+                        <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--primary-gradient); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; margin-right: 8px; box-shadow: 0 2px 6px var(--primary-glow);">
+                            <%= currentUser.username[0].toUpperCase() %>
+                        </div>
+                        <span class="fw-semibold">Hello, <strong style="color: var(--primary);"><%= currentUser.username %></strong></span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-custom w-100" href="/logout"><i class="fa-solid fa-power-off me-1"></i> Logout</a>
+                    </li>
+                <% } %>
             </ul>
         </div>
     </div>
