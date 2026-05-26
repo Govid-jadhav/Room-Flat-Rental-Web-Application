@@ -2,10 +2,57 @@ const Listing = require("../models/listing");
 const axios = require('axios');
 
 
-// 📌 INDEX CONTROLLER: Show all listings
+// 📌 INDEX CONTROLLER: Show all listings with premium search, country-filter, price-filter, and sorting
 module.exports.index = async (req, res) => {
-    const allListings = await Listing.find({});
-    res.render("index.ejs", { allListings });
+    const { q, country, minPrice, maxPrice, sortBy } = req.query;
+    let filter = {};
+    let sort = {};
+
+    // Keyword search (title, location, or country)
+    if (q) {
+        filter.$or = [
+            { title: { $regex: q, $options: "i" } },
+            { location: { $regex: q, $options: "i" } },
+            { country: { $regex: q, $options: "i" } }
+        ];
+    }
+
+    // Country filter
+    if (country && country !== "All" && country.trim() !== "") {
+        filter.country = { $regex: country.trim(), $options: "i" };
+    }
+
+    // Price range filter
+    if (minPrice || maxPrice) {
+        filter.price = {};
+        if (minPrice) filter.price.$gte = parseInt(minPrice);
+        if (maxPrice) filter.price.$lte = parseInt(maxPrice);
+    }
+
+    // Sorting logic
+    if (sortBy === "priceLowToHigh") {
+        sort.price = 1;
+    } else if (sortBy === "priceHighToLow") {
+        sort.price = -1;
+    } else if (sortBy === "titleAsc") {
+        sort.title = 1;
+    } else if (sortBy === "titleDesc") {
+        sort.title = -1;
+    }
+
+    try {
+        const allListings = await Listing.find(filter).sort(sort);
+        const countries = await Listing.distinct("country");
+        
+        res.render("index.ejs", { 
+            allListings, 
+            countries: countries.sort(),
+            filters: { q, country, minPrice, maxPrice, sortBy }
+        });
+    } catch (err) {
+        console.error("Error in index controller:", err);
+        res.status(500).send("Something went wrong");
+    }
 };
 
 module.exports.renderNewForm = (req, res) => {
@@ -112,33 +159,4 @@ module.exports.deletelisting = async (req, res) => {
     req.flash("success", "Listing deleted");
     res.redirect("/listings");
 };
-
-// controllers/listings.js
-module.exports.index = async (req, res) => {
-    const { q, minPrice, maxPrice, sortBy } = req.query;
-    let filter = {};
-    let sort = {};
-
-    // Keyword search (title or location)
-    if (q) {
-        filter.$or = [
-            { title: { $regex: q, $options: "i" } },
-            { location: { $regex: q, $options: "i" } },
-            { country: { $regex: q, $options: "i" } }
-        ];
-    }
-
-    // Price filter
-    if (minPrice || maxPrice) {
-        filter.price = {};
-        if (minPrice) filter.price.$gte = parseInt(minPrice);
-        if (maxPrice) filter.price.$lte = parseInt(maxPrice);
-    }
-
-    // Sorting logic
-    if (sortBy === "priceLowToHigh") sort.price = 1;
-    else if (sortBy === "priceHighToLow") sort.price = -1;
-
-    const listings = await Listing.find(filter).sort(sort);
-    res.render("index.ejs", { allListings: listings });
-};
+// End of Controller

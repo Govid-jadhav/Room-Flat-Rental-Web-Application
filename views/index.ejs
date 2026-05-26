@@ -13,53 +13,291 @@
     </div>
 </div>
 
+<!-- Custom Encapsulated Filter Styling -->
+<style>
+    :root {
+        --primary: #ff385c;
+        --primary-hover: #e02f50;
+        --border-color: rgba(0, 0, 0, 0.08);
+        --bg-glass: rgba(255, 255, 255, 0.85);
+    }
+
+    .filter-card {
+        background: var(--bg-glass);
+        border: 1px solid var(--border-color);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        margin-bottom: 2rem;
+        transition: all 0.3s ease;
+    }
+
+    .filter-card:hover {
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+    }
+
+    .filter-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.25rem;
+        align-items: end;
+    }
+
+    @media (max-width: 991px) {
+        .filter-row {
+            grid-template-columns: 1fr 1fr;
+        }
+        .filter-actions {
+            grid-column: span 2;
+        }
+    }
+
+    @media (max-width: 575px) {
+        .filter-row {
+            grid-template-columns: 1fr;
+        }
+        .filter-actions {
+            grid-column: span 1;
+        }
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        text-align: left;
+    }
+
+    .filter-group label {
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: #475569;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .filter-control {
+        height: 46px;
+        background-color: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        border-radius: 12px;
+        padding: 0 1rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #1e293b;
+        outline: none;
+        transition: all 0.2s ease;
+        width: 100%;
+    }
+
+    .filter-control:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(255, 56, 92, 0.12);
+    }
+
+    .filter-control::placeholder {
+        color: #94a3b8;
+    }
+
+    .btn-apply {
+        height: 46px;
+        background-color: var(--primary);
+        color: #ffffff;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 0.92rem;
+        padding: 0 1.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        box-shadow: 0 4px 15px rgba(255, 56, 92, 0.25);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+    }
+
+    .btn-apply:hover {
+        background-color: var(--primary-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(255, 56, 92, 0.35);
+        color: #ffffff;
+    }
+
+    .btn-reset {
+        height: 46px;
+        background-color: #f1f5f9;
+        color: #475569;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 0.92rem;
+        padding: 0 1.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+    }
+
+    .btn-reset:hover {
+        background-color: #e2e8f0;
+        color: #0f172a;
+    }
+
+    .filter-actions {
+        display: flex;
+        gap: 0.75rem;
+    }
+
+    .no-results-card {
+        background: #ffffff;
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 5rem 2rem;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+        margin: 2rem 0;
+    }
+
+    .no-results-icon {
+        font-size: 4rem;
+        color: #94a3b8;
+        margin-bottom: 1.5rem;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+</style>
+
+<!-- Premium Filtering & Sorting Form -->
+<div class="container mt-2">
+    <form action="/listings" method="GET" class="filter-card">
+        <div class="filter-row">
+            <!-- Keyword search -->
+            <div class="filter-group">
+                <label for="q"><i class="fa-solid fa-magnifying-glass me-1"></i> Search</label>
+                <input type="text" id="q" name="q" value="<%= filters.q || '' %>" placeholder="Name or location..." class="filter-control">
+            </div>
+
+            <!-- Country Selection -->
+            <div class="filter-group">
+                <label for="country"><i class="fa-solid fa-earth-americas me-1"></i> Country</label>
+                <select id="country" name="country" class="filter-control">
+                    <option value="All">All Countries</option>
+                    <% for (let c of countries) { %>
+                        <option value="<%= c %>" <%= filters.country === c ? 'selected' : '' %>><%= c %></option>
+                    <% } %>
+                </select>
+            </div>
+
+            <!-- Min Price -->
+            <div class="filter-group">
+                <label for="minPrice"><i class="fa-solid fa-tags me-1"></i> Min Price (₹)</label>
+                <input type="number" id="minPrice" name="minPrice" value="<%= filters.minPrice || '' %>" placeholder="Min" class="filter-control" min="0">
+            </div>
+
+            <!-- Max Price -->
+            <div class="filter-group">
+                <label for="maxPrice"><i class="fa-solid fa-tags me-1"></i> Max Price (₹)</label>
+                <input type="number" id="maxPrice" name="maxPrice" value="<%= filters.maxPrice || '' %>" placeholder="Max" class="filter-control" min="0">
+            </div>
+
+            <!-- Sort By Option -->
+            <div class="filter-group">
+                <label for="sortBy"><i class="fa-solid fa-arrow-down-wide-short me-1"></i> Sort By</label>
+                <select id="sortBy" name="sortBy" class="filter-control">
+                    <option value="" <%= !filters.sortBy ? 'selected' : '' %>>Default Sorting</option>
+                    <option value="priceLowToHigh" <%= filters.sortBy === 'priceLowToHigh' ? 'selected' : '' %>>Price: Low to High</option>
+                    <option value="priceHighToLow" <%= filters.sortBy === 'priceHighToLow' ? 'selected' : '' %>>Price: High to Low</option>
+                    <option value="titleAsc" <%= filters.sortBy === 'titleAsc' ? 'selected' : '' %>>Alphabetical: A to Z</option>
+                    <option value="titleDesc" <%= filters.sortBy === 'titleDesc' ? 'selected' : '' %>>Alphabetical: Z to A</option>
+                </select>
+            </div>
+
+            <!-- Actions buttons -->
+            <div class="filter-group filter-actions">
+                <button type="submit" class="btn-apply flex-grow-1">
+                    <i class="fa-solid fa-filter"></i> Filter
+                </button>
+                <a href="/listings" class="btn-reset">
+                    <i class="fa-solid fa-rotate-left"></i> Reset
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+
 <!-- Card Listing Grid -->
-<div class="container mt-4">
+<div class="container">
     <div class="row g-4">
-        <% for (let listing of allListings) { %>
-            <div class="col-lg-4 col-md-6">
-                <div class="hotel-card h-100">
-                    <!-- Entire Card Clickable Link -->
-                    <a href="/listings/<%= listing._id %>" class="stretched-link"></a>
-
-                    <!-- Premium Card Image -->
-                    <div class="hotel-img-wrapper">
-                        <!-- Featured Badge -->
-                        <span class="hotel-badge">
-                            <i class="fa-solid fa-location-dot me-1 text-danger"></i> <%= listing.country %>
-                        </span>
-                        <img src="<%= listing.image?.url || '/images/placeholder.jpg' %>" class="hotel-card-img" alt="Stayra property listing image">
+        <% if (allListings.length === 0) { %>
+            <div class="col-12">
+                <div class="no-results-card">
+                    <div class="no-results-icon">
+                        <i class="fa-regular fa-face-frown-open"></i>
                     </div>
+                    <h3 class="fw-bold text-dark mb-2">No Stays Found</h3>
+                    <p class="text-muted mb-4">We couldn't find any rentals matching your active filters. Try expanding your search or clearing filters.</p>
+                    <a href="/listings" class="btn-apply" style="display: inline-flex;">
+                        <i class="fa-solid fa-rotate-left"></i> Reset All Filters
+                    </a>
+                </div>
+            </div>
+        <% } else { %>
+            <% for (let listing of allListings) { %>
+                <div class="col-lg-4 col-md-6">
+                    <div class="hotel-card h-100">
+                        <!-- Entire Card Clickable Link -->
+                        <a href="/listings/<%= listing._id %>" class="stretched-link"></a>
 
-                    <!-- Custom Elegant Card Body -->
-                    <div class="hotel-card-body d-flex flex-column">
-                        <h5 class="hotel-card-title">
-                            <%= listing.title %>
-                        </h5>
-
-                        <!-- Location & Map Tag -->
-                        <div class="hotel-card-location d-flex align-items-center gap-1">
-                            <i class="fa-solid fa-map-pin text-danger" style="font-size: 0.8rem;"></i>
-                            <%= listing.location %>, <%= listing.country %>
+                        <!-- Premium Card Image -->
+                        <div class="hotel-img-wrapper">
+                            <!-- Featured Badge -->
+                            <span class="hotel-badge">
+                                <i class="fa-solid fa-location-dot me-1 text-danger"></i> <%= listing.country %>
+                            </span>
+                            <img src="<%= listing.image?.url || '/images/placeholder.jpg' %>" class="hotel-card-img" alt="Stayra property listing image">
                         </div>
 
-                        <!-- Mini elegant Description snippet -->
-                        <p class="text-muted" style="font-size: 0.88rem; line-height: 1.5; margin-bottom: 1.5rem;">
-                            <%= listing.description?.slice(0, 95) || 'No description available for this premium stay.' %>...
-                        </p>
+                        <!-- Custom Elegant Card Body -->
+                        <div class="hotel-card-body d-flex flex-column">
+                            <h5 class="hotel-card-title">
+                                <%= listing.title %>
+                            </h5>
 
-                        <!-- Price Section -->
-                        <div class="mt-auto d-flex justify-content-between align-items-center border-top pt-3">
-                            <div class="hotel-card-price">
-                                ₹ <%= (listing.price || 0).toLocaleString("en-IN") %> <span>/ night</span>
+                            <!-- Location & Map Tag -->
+                            <div class="hotel-card-location d-flex align-items-center gap-1">
+                                <i class="fa-solid fa-map-pin text-danger" style="font-size: 0.8rem;"></i>
+                                <%= listing.location %>, <%= listing.country %>
                             </div>
-                            <span class="fw-bold" style="font-size: 0.8rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px;">
-                                View Details <i class="fa-solid fa-chevron-right ms-1" style="font-size: 0.7rem;"></i>
-                            </span>
+
+                            <!-- Mini elegant Description snippet -->
+                            <p class="text-muted" style="font-size: 0.88rem; line-height: 1.5; margin-bottom: 1.5rem;">
+                                <%= listing.description?.slice(0, 95) || 'No description available for this premium stay.' %>...
+                            </p>
+
+                            <!-- Price Section -->
+                            <div class="mt-auto d-flex justify-content-between align-items-center border-top pt-3">
+                                <div class="hotel-card-price">
+                                    ₹ <%= (listing.price || 0).toLocaleString("en-IN") %> <span>/ night</span>
+                                </div>
+                                <span class="fw-bold" style="font-size: 0.8rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px;">
+                                    View Details <i class="fa-solid fa-chevron-right ms-1" style="font-size: 0.7rem;"></i>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            <% } %>
         <% } %>
     </div>
 </div>
