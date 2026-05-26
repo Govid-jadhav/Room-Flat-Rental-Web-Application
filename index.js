@@ -123,14 +123,11 @@ async function initializeApp() {
         req.flash("error", err.message);
         res.redirect("/listings");
     });
+
+    const port = process.env.PORT || 8080;
+    app.listen(port, () => {
+        console.log(`server is listening to port ${port}`);
+    });
 }
 
 initializeApp();
-
-
-app.listen(8080, () => {
-    console.log("server is listening to port 8080");
-});
-// app.all('*', (req, res) => {
-//     res.status(404).render('404');
-// });
