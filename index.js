@@ -10,7 +10,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const listings = require("./routes/listing.js");
 const reviewRoutes = require("./routes/review.js");
-const bdurl = process.env.ATLASDB_URL;
+const bdurl = process.env.ATLASDB_URL || process.env.MONGO_URI;
 // const MONGO_URL = "mongodb://127.0.0.1:27017/room";
 
 const ExpressError = require("./utils/ExpressError.js");
