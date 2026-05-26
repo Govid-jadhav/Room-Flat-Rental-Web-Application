@@ -1,12 +1,16 @@
 const mongoose = require("mongoose");
 const initData = require("./data"); // ✅ this matches your export
 const Listing = require("../models/listing.js");
+const path = require("path");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/room";
+// Load .env from the parent directory
+require("dotenv").config({ path: path.join(__dirname, "../.env") });
+
+const MONGO_URL = process.env.ATLASDB_URL || process.env.MONGO_URI || "mongodb://127.0.0.1:27017/room";
 
 main()
     .then(() => {
-        console.log("Connected to DB");
+        console.log("Connected successfully to database for seeding.");
         initDB(); // ✅ call it here
     })
     .catch((err) => {
@@ -14,6 +18,7 @@ main()
     });
 
 async function main() {
+    console.log("Connecting to:", MONGO_URL.replace(/:([^:@]+)@/, ":****@")); // Safe log
     await mongoose.connect(MONGO_URL);
 }
 

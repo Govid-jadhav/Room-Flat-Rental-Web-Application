@@ -347,6 +347,281 @@ const sampleListings = [
         location: "Costa Rica",
         country: "Costa Rica",
     },
+    {
+        title: "Portuguese Heritage Villa",
+        description: "Immerse yourself in history in this 150-year-old restored Portuguese villa with a private courtyard pool. Located a short walk from Anjuna Beach.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 8500,
+        location: "Anjuna, Goa",
+        country: "India"
+    },
+    {
+        title: "Snow-View Wooden Chalet",
+        description: "Unwind in this premium cedar log chalet with glowing stone fireplace and magnificent views of the snow-peaked Solang Valley mountains.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 6200,
+        location: "Manali, Himachal Pradesh",
+        country: "India"
+    },
+    {
+        title: "Royal Lake Palace Suite",
+        description: "Experience the ultimate royalty of Udaipur. Overlooking Lake Pichola, this hand-painted luxurious suite features marble carvings and heritage vibes.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 14500,
+        location: "Udaipur, Rajasthan",
+        country: "India"
+    },
+    {
+        title: "Luxury Kerala Backwater Houseboat",
+        description: "Cruise the tranquil backwaters of Vembanad Lake in a traditional thatched-roof luxury houseboat. Includes onboard chef serving authentic Malabar cuisine.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 11000,
+        location: "Alleppey, Kerala",
+        country: "India"
+    },
+    {
+        title: "Floating Dal Lake Houseboat",
+        description: "Stay in a beautifully carved cedar wood Kashmiri houseboat on Dal Lake. Enjoy shikara rides, mountain silhouettes, and morning flower markets.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 5800,
+        location: "Srinagar, Jammu & Kashmir",
+        country: "India"
+    },
+    {
+        title: "Coffee Estate Heritage Bungalow",
+        description: "Immerse yourself in lush coffee plantations inside this colonial-era planter's bungalow. Features high ceilings, wooden swings, and misty mornings.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 7500,
+        location: "Madikeri, Coorg, Karnataka",
+        country: "India"
+    },
+    {
+        title: "Ganges River-View Spiritual Retreat",
+        description: "Find peace in this modern riverside retreat in the yoga capital. Wake up to direct views of the holy Ganges and nearby green Himalayan foothills.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1545208935-21e7a5139b10?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 4800,
+        location: "Rishikesh, Uttarakhand",
+        country: "India"
+    },
+    {
+        title: "Himalayan Ridge Eco Lodge",
+        description: "Stunning eco-friendly organic farming lodge. Enjoy crystal-clear views of the Mt. Kanchenjunga range while relaxing on the solar-heated glass balcony.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 5200,
+        location: "Gangtok, Sikkim",
+        country: "India"
+    },
+    {
+        title: "Tea Garden Colonial Bungalow",
+        description: "Step back in time in this beautifully preserved British-era colonial villa overlooking green rolling tea plantations in the Nilgiris.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1533619239233-6280475a633a?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 9200,
+        location: "Ooty, Tamil Nadu",
+        country: "India"
+    },
+    {
+        title: "Lakeside Luxury Glamping Dome",
+        description: "Modern geodesic dome with a private deck, plunge pool, and beautiful sunrise views over Pawna Lake. Perfect weekend getaway from Mumbai.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 8800,
+        location: "Lonavala, Maharashtra",
+        country: "India"
+    },
+    {
+        title: "Cliffside Sea-View Sanctuary",
+        description: "Perched on the red cliffs of Varkala Beach. Wake up to panoramic Arabian Sea views, watch dolphins, and enjoy therapeutic Ayurvedic treatments.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 6800,
+        location: "Varkala, Kerala",
+        country: "India"
+    },
+    {
+        title: "Desert Dunes Royal Camp",
+        description: "Sleep under a blanket of stars in a luxury canvas Swiss tent nestled in the golden sand dunes of Thar Desert. Includes camel safari and folk dance show.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 7800,
+        location: "Sam Sand Dunes, Jaisalmer, Rajasthan",
+        country: "India"
+    },
+    {
+        title: "Tiger Reserve Luxury Jungle Lodge",
+        description: "Elegant wooden safari suites built adjacent to the tiger reserve. Featuring private outdoor showers, nature trails, and open-jeep safaris.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 12500,
+        location: "Kanha National Park, Madhya Pradesh",
+        country: "India"
+    },
+    {
+        title: "Darjeeling Tea Estate Villa",
+        description: "Breathtaking views of the Himalayan valleys. Stay inside this pristine wood-paneled cottage with fireplace and organic tea tasting gardens.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1500627869374-13cd993b1115?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 6900,
+        location: "Darjeeling, West Bengal",
+        country: "India"
+    },
+    {
+        title: "Cloud-Kissed Rainforest Treehouse",
+        description: "Sleep high above the green rainforest canopy in this premium bamboo treehouse. Experience the stunning living root bridges and cascading waterfalls.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 8000,
+        location: "Cherrapunji, Meghalaya",
+        country: "India"
+    },
+    {
+        title: "French Quarter Heritage Home",
+        description: "Charming pastel yellow French colonial mansion with high arches, bougainvillea courtyard, and vintage furniture. 2 minutes walk to Rock Beach.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 6400,
+        location: "White Town, Pondicherry",
+        country: "India"
+    },
+    {
+        title: "Havelock Private Beach Cabana",
+        description: "Sleek eco-cabana built on the white sands of Radhanagar Beach. Features beautiful turquoise ocean views, hammock decks, and private scuba guides.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 13500,
+        location: "Havelock Island, Andaman & Nicobar",
+        country: "India"
+    },
+    {
+        title: "Himalayan Stone Cottage",
+        description: "Charming stone cottage set amidst apple orchards. Enjoy direct views of the Nanda Devi peak, organic fruit picking, and crackling fireplaces.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 4900,
+        location: "Mukteshwar, Uttarakhand",
+        country: "India"
+    },
+    {
+        title: "Pine Forest Ridge Cabin",
+        description: "Perched high in the cedar woods of Dharamshala, this beautiful loft style wood cabin provides quiet views of the Dhauladhar mountain range.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 4500,
+        location: "McLeod Ganj, Dharamshala, Himachal Pradesh",
+        country: "India"
+    },
+    {
+        title: "Hampi Ruins View Heritage Lodge",
+        description: "Stay in a beautiful traditional stone mansion blending into the boulder-strewn landscape of Hampi. Excellent rooftop view of the Virupaksha Temple.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 3800,
+        location: "Hampi, Karnataka",
+        country: "India"
+    },
+    {
+        title: "Traditional Rann Bhunga Cottage",
+        description: "Experience Kutch culture in a luxury 'Bhunga' (circular mud cottage) painted with exquisite mirror work. Watch white salt desert sunsets.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 7200,
+        location: "Dhordo, Rann of Kutch, Gujarat",
+        country: "India"
+    },
+    {
+        title: "Royal Nizam Palace Suite",
+        description: "Live the luxury of the Nizams in this beautifully restored palace wing. Vintage chandeliers, grand arches, and royal carriage rides.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 18000,
+        location: "Hyderabad, Telangana",
+        country: "India"
+    },
+    {
+        title: "Pangong Lake Luxury Camp",
+        description: "Rest inside warm insulated lake-view camps right next to the crystal blue Pangong Lake. Witness the shifting colors of Ladakh's high-altitude water.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 8500,
+        location: "Pangong Lake, Ladakh",
+        country: "India"
+    },
+    {
+        title: "Rhino Sanctuary Forest Cottage",
+        description: "Stay in a stilt wooden cottage surrounded by tea gardens and elephant corridors, located minutes from the Kaziranga rhino safari gates.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 5500,
+        location: "Kaziranga, Assam",
+        country: "India"
+    },
+    {
+        title: "Tranquil Beachfront Sanctuary",
+        description: "Quiet eco-friendly cottages right on the sandy shores of Puri Beach, surrounded by casuarina trees. Includes traditional temple tour guides.",
+        image: {
+            filename: "listingimage",
+            url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=60"
+        },
+        price: 4200,
+        location: "Puri, Odisha",
+        country: "India"
+    }
 ];
 
 module.exports = { data: sampleListings };
