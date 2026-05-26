@@ -3,20 +3,32 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Stayra - Your Stay, Your Way</title>
+    <title>Stayra - Premium Stays, Handpicked for You</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- Bootstrap (optional but helpful) -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 
-    <!-- Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Internal CSS -->
+    <!-- Internal CSS (Vanilla for maximum control) -->
     <style>
+        :root {
+            --primary: #ff385c;
+            --primary-hover: #e31c5f;
+            --bg-dark: #0b0f19;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --text-light: #f8fafc;
+            --text-gray: #94a3b8;
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.15);
+        }
+
         /* General Reset */
         * {
             margin: 0;
@@ -25,226 +37,1039 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         a {
             text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Top Premium Navbar */
+        .premium-nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 24px 5%;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-logo i {
+            color: var(--primary);
+            filter: drop-shadow(0 0 10px rgba(255, 56, 92, 0.4));
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-link-item {
+            color: var(--text-gray);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-link-item:hover {
+            color: var(--text-light);
+        }
+
+        .nav-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid transparent;
+            box-shadow: 0 4px 15px rgba(255, 56, 92, 0.35);
+        }
+
+        .nav-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 56, 92, 0.5);
+            color: white;
         }
 
         /* Hero Section */
         .hero {
-            background: url('/src/hero.jpg') center/cover no-repeat;
+            background: linear-gradient(180deg, rgba(11, 15, 25, 0.4) 0%, rgba(11, 15, 25, 0.95) 100%), 
+                        url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
             height: 100vh;
-            color: white;
+            min-height: 800px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             text-align: center;
+            padding: 0 20px;
         }
 
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.5);
+            background: radial-gradient(circle at center, transparent 0%, rgba(11, 15, 25, 0.8) 100%);
+            pointer-events: none;
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
-            max-width: 700px;
-            padding: 20px;
+            max-width: 900px;
+            margin-top: 60px;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid var(--border-glass);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge i {
+            color: var(--primary);
+            animation: pulse 2s infinite;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.15;
             margin-bottom: 20px;
+            letter-spacing: -1.5px;
+            background: linear-gradient(135deg, #ffffff 30%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 25px;
-        }
-
-        .btn {
-            background-color: #fe424d;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #dc2c3b;
-        }
-
-        /* Features Section */
-        .features {
-            background-color: #f8f9fa;
-            padding: 60px 20px;
-        }
-
-        .features h2 {
-            font-size: 2.2rem;
+            font-size: 1.25rem;
+            color: var(--text-gray);
             margin-bottom: 40px;
-            font-weight: 600;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
         }
 
-        .feature-box {
-            background-color: white;
-            border-radius: 12px;
-            padding: 30px 20px;
+        /* Integrated Search Bar */
+        .search-panel {
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(20px);
+            border-radius: 40px;
+            padding: 10px 10px 10px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 850px;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .search-panel:focus-within {
+            border-color: rgba(255, 56, 92, 0.4);
+            box-shadow: 0 20px 45px rgba(255, 56, 92, 0.15);
+        }
+
+        .search-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            flex: 1;
+            padding-right: 15px;
+        }
+
+        .search-group:not(:last-of-type) {
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            margin-right: 15px;
+        }
+
+        .search-group label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .search-group input, .search-group select {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            font-weight: 500;
+            outline: none;
+            width: 100%;
+        }
+
+        .search-group input::placeholder {
+            color: #64748b;
+        }
+
+        .search-group select option {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        .search-btn {
+            background-color: var(--primary);
+            color: white;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 56, 92, 0.3);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .search-btn:hover {
+            background-color: var(--primary-hover);
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(255, 56, 92, 0.45);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.02) 100%);
+            border-top: 1px solid var(--border-glass);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 30px 0;
+            margin-top: -30px;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-item {
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            transition: 0.3s ease;
         }
 
-        .feature-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        .stat-item h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 5px;
         }
 
-        .icon {
+        .stat-item p {
+            font-size: 0.88rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 100px 5%;
+            background-color: #0b0f19;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: 'Outfit', sans-serif;
             font-size: 2.5rem;
-            color: #fe424d;
+            font-weight: 700;
+            letter-spacing: -0.5px;
             margin-bottom: 15px;
         }
 
-        /* CTA Section */
-        .cta {
-            padding: 60px 20px;
-            background-color: #fff;
+        .section-header p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 40px 30px;
             text-align: center;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
         }
 
-        .cta h3 {
-            font-size: 1.75rem;
-            margin-bottom: 20px;
+        .cat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent 60%, rgba(255, 56, 92, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .cat-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 56, 92, 0.25);
+            box-shadow: 0 15px 35px rgba(255, 56, 92, 0.08);
+        }
+
+        .cat-card:hover::before {
+            opacity: 1;
+        }
+
+        .cat-icon-wrapper {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(255, 56, 92, 0.08);
+            border: 1px solid rgba(255, 56, 92, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: var(--primary);
+            font-size: 1.6rem;
+            transition: all 0.3s ease;
+        }
+
+        .cat-card:hover .cat-icon-wrapper {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 20px rgba(255, 56, 92, 0.3);
+        }
+
+        .cat-card h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
             font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-light);
         }
 
-        .cta .btn {
-            padding: 12px 30px;
-            font-size: 1rem;
+        .cat-card p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 0;
         }
 
-        /* Footer */
-        .footer {
-            background-color: #ffffff;
-            padding: 40px 0 20px;
+        /* Testimonials */
+        .testimonials {
+            background: linear-gradient(180deg, #0b0f19 0%, #0e1320 100%);
+            padding: 100px 5%;
+            border-top: 1px solid var(--border-glass);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .review-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 35px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-3px);
+        }
+
+        .stars {
+            color: #fbbf24;
             font-size: 0.95rem;
-            color: #6c757d;
-            border-top: 1px solid #e0e0e0;
+            margin-bottom: 20px;
         }
 
-        .footer a {
-            color: #6c757d;
-            text-decoration: none;
+        .review-text {
+            color: #cbd5e1;
+            font-size: 0.98rem;
+            font-style: italic;
+            margin-bottom: 25px;
+            position: relative;
         }
 
-        .footer a:hover {
-            color: #000;
-            text-decoration: underline;
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 20px;
         }
 
-        .footer-social a {
-            font-size: 1.2rem;
-            margin: 0 10px;
+        .reviewer-img {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
+        .reviewer-details h5 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 0;
+            color: var(--text-light);
+        }
+
+        .reviewer-details p {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            margin: 0;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 100px 5%;
+            background-color: #0b0f19;
+        }
+
+        .faq-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: border-color 0.3s ease;
+        }
+
+        .faq-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .faq-card details {
+            padding: 24px;
+        }
+
+        .faq-card summary {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-light);
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            outline: none;
+        }
+
+        .faq-card summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-card summary::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-card details[open] summary::after {
+            transform: rotate(180deg);
+            color: var(--primary);
+        }
+
+        .faq-answer {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* Call To Action */
+        .cta-section {
+            padding: 100px 5%;
+            background: linear-gradient(135deg, rgba(255, 56, 92, 0.15) 0%, rgba(99, 102, 241, 0.05) 100%), #0e1320;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--border-glass);
+        }
+
+        .cta-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 56, 92, 0.15) 0%, transparent 70%);
+            top: -200px;
+            left: calc(50% - 200px);
+            pointer-events: none;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-content p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+        }
+
+        .cta-content .btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 14px 35px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(255, 56, 92, 0.4);
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-content .btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 56, 92, 0.6);
+        }
+
+        /* Premium Footer */
+        .premium-footer {
+            background-color: #080b12;
+            border-top: 1px solid var(--border-glass);
+            padding: 80px 5% 40px;
+        }
+
+        .footer-logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-logo i {
+            color: var(--primary);
+        }
+
+        .footer-desc {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .footer-social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-glass);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .social-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .footer-header {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-link-item {
+            margin-bottom: 12px;
+        }
+
+        .footer-link-item a {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .footer-link-item a:hover {
+            color: var(--text-light);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 60px;
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom-text {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-bottom-links a {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--text-light);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.15);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 991px) {
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 3rem;
             }
+            .search-panel {
+                flex-direction: column;
+                border-radius: 24px;
+                padding: 24px;
+                gap: 20px;
+            }
+            .search-group {
+                border-right: none !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                padding-right: 0;
+                padding-bottom: 15px;
+                margin-right: 0;
+                width: 100%;
+            }
+            .search-btn {
+                width: 100%;
+                border-radius: 12px;
+                height: 50px;
+            }
+            .premium-nav {
+                padding: 20px 24px;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
 
+        @media (max-width: 767px) {
+            .hero h1 {
+                font-size: 2.4rem;
+                letter-spacing: -1px;
+            }
             .hero p {
-                font-size: 1rem;
+                font-size: 1.05rem;
             }
-
-            .feature-box {
+            .stats-bar {
+                padding: 15px 0;
+            }
+            .stat-item {
                 margin-bottom: 20px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Hero Section -->
+    <!-- Top Premium Navbar -->
+    <nav class="premium-nav">
+        <a href="/" class="brand-logo">
+            <i class="fa-solid fa-house-chimney-window"></i> Stayra
+        </a>
+        <div class="nav-links">
+            <a href="/listings" class="nav-link-item">Explore Stays</a>
+            <a href="/login" class="nav-link-item">Log In</a>
+            <a href="/signup" class="nav-btn">Start Hosting</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Premium Backdrop -->
     <section class="hero">
         <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-sparkles"></i> The Modern Rental Platform
+            </div>
             <h1>Stayra: Your Stay, Your Way</h1>
-            <p>Find and manage perfect stays across the country – easy, secure, and reliable.</p>
-            <a href="/listings" class="btn">Explore Listings</a>
+            <p>Discover boutique hotels, cozy apartments, and luxury villas curated specifically for you.</p>
+
+            <!-- Functional Beautiful Search Panel -->
+            <form action="/listings" method="GET" class="search-panel">
+                <div class="search-group">
+                    <label for="destination"><i class="fa-solid fa-location-dot me-1"></i> Destination</label>
+                    <input type="text" id="destination" name="q" placeholder="Where are you going?" required>
+                </div>
+                <div class="search-group">
+                    <label for="dates"><i class="fa-solid fa-calendar me-1"></i> Travel Dates</label>
+                    <input type="text" id="dates" placeholder="Check in - Check out" onfocus="(this.type='date')" onblur="(this.type='text')">
+                </div>
+                <div class="search-group">
+                    <label for="guests"><i class="fa-solid fa-user-group me-1"></i> Guests</label>
+                    <select id="guests">
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4+ Guests</option>
+                    </select>
+                </div>
+                <button type="submit" class="search-btn" aria-label="Search listings">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features">
+    <!-- Sleek Stats Bar -->
+    <section class="stats-bar">
         <div class="container">
-            <h2>Why Choose Stayra?</h2>
-            <div class="row justify-content-center">
-                <div class="col-md-4 mb-4">
-                    <div class="feature-box">
-                        <div class="icon"><i class="fas fa-bed"></i></div>
-                        <h5>Comfortable Listings</h5>
-                        <p>Verified and curated rooms and apartments for all budgets.</p>
+            <div class="row align-items-center">
+                <div class="col-md-4 col-sm-12">
+                    <div class="stat-item">
+                        <h3>15,000+</h3>
+                        <p>Verified Stays</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="feature-box">
-                        <div class="icon"><i class="fas fa-calendar-check"></i></div>
-                        <h5>Easy Booking</h5>
-                        <p>Instant availability checks and hassle-free reservations.</p>
+                <div class="col-md-4 col-sm-12">
+                    <div class="stat-item">
+                        <h3>99.8%</h3>
+                        <p>Happy Renters</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="feature-box">
-                        <div class="icon"><i class="fas fa-lock"></i></div>
-                        <h5>Secure Management</h5>
-                        <p>Reliable backend with secure login, roles, and access control.</p>
+                <div class="col-md-4 col-sm-12">
+                    <div class="stat-item">
+                        <h3>24/7</h3>
+                        <p>Instant Support</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta">
-        <h3>Ready to find your next perfect stay?</h3>
-        <a href="/signup" class="btn">Join Now</a>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer text-center text-md-start">
+    <!-- Categories Section -->
+    <section class="categories">
         <div class="container">
-            <hr>
-            <div class="row align-items-center">
-                <div class="col-md-6 mb-3 mb-md-0">
-                    <div>&copy; 2025 <strong>Stayra</strong>. All rights reserved.</div>
-                    <div class="mt-2">
-                        <a href="#">Privacy</a> |
-                        <a href="#">Terms</a> |
-                        <a href="#">Sitemap</a> |
-                        <a href="#">Company</a>
+            <div class="section-header">
+                <h2>Explore by Experience</h2>
+                <p>No matter where your adventures lead, find perfect properties built for your lifestyle.</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="cat-card">
+                        <div class="cat-icon-wrapper">
+                            <i class="fa-solid fa-house-laptop"></i>
+                        </div>
+                        <h4>Workation Spaces</h4>
+                        <p>Spaces styled with high-speed internet and dedicated workspaces to stay productive on the road.</p>
                     </div>
                 </div>
-                <div class="col-md-6 text-md-end">
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                <div class="col-lg-4 col-md-6">
+                    <div class="cat-card">
+                        <div class="cat-icon-wrapper">
+                            <i class="fa-solid fa-umbrella-beach"></i>
+                        </div>
+                        <h4>Luxury Resorts</h4>
+                        <p>Premium beachfront villas, penthouses, and private estates featuring breathtaking scenery.</p>
                     </div>
-                    <div class="mt-2">
-                        🌐 English (IN) | ₹ INR
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="cat-card">
+                        <div class="cat-icon-wrapper">
+                            <i class="fa-solid fa-tree-city"></i>
+                        </div>
+                        <h4>Urban Lodges</h4>
+                        <p>Charming micro-apartments and flats conveniently located in the center of cultural cities.</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Loved by Thousands</h2>
+                <p>See why global travelers and remote professionals make Stayra their home on the go.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="review-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"Finding a cozy, quiet work retreat used to take hours. Stayra's listings are highly curated, and the booking was absolutely seamless. I'll definitely be back!"</p>
+                        <div class="reviewer-info">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="Sarah K." class="reviewer-img">
+                            <div class="reviewer-details">
+                                <h5>Sarah Jenkins</h5>
+                                <p>Freelance Designer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="review-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"Host support is phenomenal, and the interface is lightning fast. Everything matches the listings precisely. 5-star experience from start to finish."</p>
+                        <div class="reviewer-info">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="David L." class="reviewer-img">
+                            <div class="reviewer-details">
+                                <h5>David Lind</h5>
+                                <p>Digital Nomad</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mx-auto">
+                    <div class="review-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"Security is my priority, and Stayra's strict verification rules gave me full peace of mind. Highly recommend the beachfront listings!"</p>
+                        <div class="reviewer-info">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80" alt="Elena R." class="reviewer-img">
+                            <div class="reviewer-details">
+                                <h5>Elena Rostova</h5>
+                                <p>Global Explorer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Have questions about bookings or listing properties? We have got you covered.</p>
+            </div>
+            <div class="faq-wrapper">
+                <div class="faq-card">
+                    <details>
+                        <summary>How do I book a rental on Stayra?</summary>
+                        <div class="faq-answer">
+                            Simply use our built-in Search bar to look up your desired location. Browse our verified listings, view the property details, click book, and complete your reservation!
+                        </div>
+                    </details>
+                </div>
+                <div class="faq-card">
+                    <details>
+                        <summary>Are the properties on Stayra verified?</summary>
+                        <div class="faq-answer">
+                            Yes! Our specialized operations team coordinates reviews and identity validations for every single host and listing to maintain our 100% verified status.
+                        </div>
+                    </details>
+                </div>
+                <div class="faq-card">
+                    <details>
+                        <summary>Can I list my own apartment or hotel?</summary>
+                        <div class="faq-answer">
+                            Absolutely! Signing up as a host takes under 5 minutes. Click the "Start Hosting" button in our navbar to list your property and begin accepting bookings today.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic CTA Section -->
+    <section class="cta-section">
+        <div class="cta-glow"></div>
+        <div class="cta-content">
+            <h2>Find Your Next Destination</h2>
+            <p>Join thousands of happy travelers finding premium rooms, apartments, and retreats worldwide.</p>
+            <a href="/listings" class="btn">Explore All Stays <i class="fa-solid fa-arrow-trend-up ms-1"></i></a>
+        </div>
+    </section>
+
+    <!-- Premium Footer -->
+    <footer class="premium-footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-5 col-md-12">
+                    <div class="footer-logo">
+                        <i class="fa-solid fa-house-chimney-window"></i> Stayra
+                    </div>
+                    <p class="footer-desc" style="max-width: 380px;">
+                        Stayra offers a curated experience matching digital travelers and holidaymakers with verified, premium stays around the country. Secure, reliable, and modern.
+                    </p>
+                    <div class="footer-social-links">
+                        <a href="#" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-twitter-x"></i></a>
+                        <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <h5 class="footer-header">Support</h5>
+                    <ul class="footer-links">
+                        <li class="footer-link-item"><a href="#">Help Center</a></li>
+                        <li class="footer-link-item"><a href="#">Safety Rules</a></li>
+                        <li class="footer-link-item"><a href="#">Cancellation Options</a></li>
+                        <li class="footer-link-item"><a href="#">Premium Care</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <h5 class="footer-header">Hosting</h5>
+                    <ul class="footer-links">
+                        <li class="footer-link-item"><a href="/signup">Start Hosting</a></li>
+                        <li class="footer-link-item"><a href="#">Host Insurance</a></li>
+                        <li class="footer-link-item"><a href="#">Resources</a></li>
+                        <li class="footer-link-item"><a href="#">Community Forums</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-12">
+                    <h5 class="footer-header">Stayra</h5>
+                    <ul class="footer-links">
+                        <li class="footer-link-item"><a href="#">About Us</a></li>
+                        <li class="footer-link-item"><a href="#">Careers</a></li>
+                        <li class="footer-link-item"><a href="#">Press Room</a></li>
+                        <li class="footer-link-item"><a href="#">Newsletters</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-bottom-text">&copy; 2026 Stayra Inc. Hand-crafted for premium experiences.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & Conditions</a>
+                    <a href="#">Sitemap</a>
                 </div>
             </div>
         </div>
