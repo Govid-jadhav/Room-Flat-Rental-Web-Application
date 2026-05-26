@@ -28,7 +28,11 @@ const initDB = async () => {
         const listingsWithOwner = initData.data.map((obj) => {
             return {
                 ...obj,
-                owner: new mongoose.Types.ObjectId("68891409332a9a44ac7b2328")
+                owner: new mongoose.Types.ObjectId("68891409332a9a44ac7b2328"),
+                geometry: obj.geometry || {
+                    type: "Point",
+                    coordinates: [77.209, 28.613] // Default coordinates [longitude, latitude] (New Delhi)
+                }
             };
         });
         await Listing.insertMany(listingsWithOwner);
